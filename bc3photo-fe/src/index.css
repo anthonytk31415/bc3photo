@@ -1,0 +1,135 @@
+/* body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+} */
+
+* {
+  padding: 0;
+  margin: 0;
+}
+html, body, .app, .router {
+  background-color: #333;
+  margin: 0;
+}
+
+.bc3logo {
+  width: 56.6px;
+  height: 40px;
+}
+
+
+.socialMediaLink {
+  width: 20px;
+  height: 20px;
+}
+
+.icon-invert-color {
+  filter: brightness(0) invert(1); /* Apply brightness and invert filters */
+}
+
+.cartSize {
+  width: 25px;
+  height: 25px;
+}
+
+.menuBar {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly; 
+  align-items: center; 
+
+  position: fixed; /* Set the position to fixed */
+  top: 0; /* Stick to the top of the viewport */
+  left: 0; /* Stick to the left of the viewport */
+  width: 100%; /* Take the full width of the viewport */
+  height: 60px;
+  z-index: 1000; 
+
+}
+
+
+.menuBar, .bottomRibbon {
+  background-color: #333; /* Adjust background color as needed */
+
+}
+
+.bottomRibbon{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding-top: 16px;
+  /* padding-bottom: 20px; */
+  /* margin: 0; */
+}
+
+
+.menuBarLink, .bottomRibbonCaption {
+
+  text-decoration: none; /* Remove underline style */
+  line-height: 16px;
+  font-size: .9em;
+  font-weight: 400;
+  font-style: normal;
+  font-family: Lato, sans-serif;
+  letter-spacing: .02em;
+
+}
+
+.bottomRibbonCaption {
+  font-size: .7em;
+  color: darkgray;
+}
+
+.menuBarLink {
+  text-transform: uppercase;
+  color: #ffffff;
+}
+.about {
+  color: #ffffff;
+  font-family: Lato, sans-serif;
+
+}
+
+
+.main {
+  padding-top: 60px;
+}
+
+.coverImgContainer {
+  position: relative;
+  width: 100%;
+  max-width: 100%;
+  overflow: hidden;
+  aspect-ratio: auto 3/2;
+  /* height: 100vh; 100% of viewport height */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.carousel-image-wrapper {
+  position: relative;
+  padding-top: 66.67%; /* 3:2 aspect ratio (2/3 * 100%) */
+}
+
+.carousel-image {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* Ensures the image covers the entire area */
+}
+
+
+.carousel .carousel-control { visibility: hidden; }
+.carousel:hover .carousel-control { visibility: visible; }

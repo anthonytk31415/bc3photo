@@ -1,10 +1,12 @@
 import React from 'react';
+import { CreateBlogPost } from './createBlogPost';
 
 
 function Faq() {
     return (
         <div>
-            This is my FAQ.
+            <p> This is my FAQ.</p>
+            <CreateBlogPost></CreateBlogPost>
         </div>
     )
 }

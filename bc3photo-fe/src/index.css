@@ -17,7 +17,7 @@ code {
   margin: 0;
 }
 html, body, .app, .router {
-  background-color: #333;
+  background-color: lightblue; /* #333*/
   margin: 0;
 }
 
@@ -58,7 +58,7 @@ html, body, .app, .router {
 
 
 .menuBar, .bottomRibbon {
-  background-color: #333; /* Adjust background color as needed */
+  background-color: lightblue; /* Adjust background color as needed */
 
 }
 
@@ -131,5 +131,5 @@ html, body, .app, .router {
 }
 
 
-.carousel .carousel-control { visibility: hidden; }
-.carousel:hover .carousel-control { visibility: visible; }
+/* .carousel .carousel-control { visibility: hidden; }
+.carousel:hover .carousel-control { visibility: visible; } */

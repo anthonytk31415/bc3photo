@@ -1,3 +1,5 @@
+
+/// we'll use this to submit to the backend
 class BlogPost {
     constructor(authorId, title, date, blogBody, cover) {
         this.authorId = authorId
@@ -8,6 +10,8 @@ class BlogPost {
     }
 
 }
+
+// we'll use this to house all elements of the blogpost content. 
 // will contain an array of elements that will be rendered
 // based on the type in that order in the array
 class BlogPostBody {
@@ -32,7 +36,11 @@ class BlogPostBody {
 }
 
 
+// these are elemnts of the blogpostbody
 // types include: text, h3, h4, imageSet
+// for text, h3, h4: data = string.
+// for imageSet, data = imageSetData
+
 class BlogPostBodyElement {
     constructor (type, data) {
         this.type = type
@@ -40,11 +48,12 @@ class BlogPostBodyElement {
     }
 }
 
-class imageSet {
-    constructor(filename, caption) {
+class ImageSetData {
+    constructor(filename, caption, file=null) {
         this.filename = filename
         this.caption = caption
+        this.file = file
     }
 }
 
-export {BlogPost, BlogPostBody, BlogPostBodyElement, imageSet}
+export {BlogPost, BlogPostBody, BlogPostBodyElement, ImageSetData}

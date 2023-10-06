@@ -1,12 +1,14 @@
 import React from 'react';
-import { CreateBlogPost } from './createBlogPost';
+import { CreateBlogPostMenu } from './createBlogPost';
 
 
 function Faq() {
+    
     return (
         <div>
             <p> This is my FAQ.</p>
-            <CreateBlogPost></CreateBlogPost>
+            <CreateBlogPostMenu></CreateBlogPostMenu>
+
         </div>
     )
 }

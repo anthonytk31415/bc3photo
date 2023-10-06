@@ -1,65 +1,44 @@
 import React, { useState } from 'react';
 import { BlogPost, BlogPostBody } from './classes/BlogPost';
+import {ImageSetElement, BlogPostProvider, BaseElements,
+        TextOrHeaderFormElement, BlogPostAddElementsMenu,
+        SubmitBlogPostButton } from './components/BlogPostElements';
 
 
-function addH3Element(){
-    return 
-}
+// you'll need to make a context for the post elements so everytime you add element, you add that 
+// to the input array and the object changes and
+// then subsequently you render the array of elements 
+
+// will have to also define how you upload photos
+
+// need a final submit button 
+
+
+// flow for submitting elements: 
+// - add element button to then toggle screen. 
+// - select from list a h3/h4/text/imageset
+// - once selected, the input comes. a button "submit" also shows upload. 
+// - "submitted" will trigger a render
+// - when submitted, that piece will get added to the Array. 
+
+
+// do i need to input somethign where it'll submit the thing into the object?
 
 
 
-function CreateBlogPost() {
-    // const [author, setAuthor] = useState('');
-    const [title, setTitle] = useState('');
-    const [cover, setCover] = useState(''); // need to figure out how to "upload"
-
-
-    const [blogPost, setBlogPost] = useState(new BlogPost());
-    const [body, setBody] = useState(new BlogPostBody()) ;
-
-    function handleTitleChange(e) {
-        setTitle(e.target.value);
-    }
-
-    function handleCoverChange(e) {
-        setCover(e.target.value);
-    }
-
-    function submitButton() {
-        console.log("submitted")
-    }
+function CreateBlogPostMenu() {
 
     return (
+        <BlogPostProvider>
         <div> 
-            <p> Create your elements </p>
-            <form action ={submitButton} method="POST"> 
-                <label for="author">Author:
-                    <input type="text" id="title" name="title" value="Billy" required></input>
-
-                </label> 
-                <label for="title">Title:
-                    <input type="text" id="title" name="title" value={title} onChange={handleTitleChange} required></input>
-                </label> 
-                <label for="cover">Cover:
-                    <input type="text" id="cover" name="cover" value={cover} onChange={handleCoverChange} required></input>
-                </label> 
-
-            </form>
-            <div>
-                <p> Add Content: </p>
-
-            </div>
-
-
-            <p> preview your content: </p> 
-            <div> 
-
-            </div>
-
+            <BaseElements/>
+            <BlogPostAddElementsMenu/>
+            <SubmitBlogPostButton/>
         </div> 
+        </BlogPostProvider>
     )
 }
 
 
 
-export { CreateBlogPost }
+export { CreateBlogPostMenu }

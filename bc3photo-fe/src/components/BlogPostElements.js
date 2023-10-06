@@ -10,7 +10,7 @@ function BlogPostProvider({children}) {
 
     const [blogPostBody, setBlogPostBody] = useState([]);
     const [title, setTitle] = useState('');
-    const [cover, setCover] = useState('');
+    const [cover, setCover] = useState(null);
 
     const [elementType, setElementType] = useState('');
     const [showAddElement, setShowAddElement] = useState(false);
@@ -23,9 +23,21 @@ function BlogPostProvider({children}) {
         setTitle(e.target.value);
     }
 
-    function handleCoverChange(e) {
-        setCover(e.target.value);
-    }
+    function handleCoverUpload(e) {
+        const selectedImage = e.target.files[0];
+    
+        if (selectedImage) {        
+        const reader = new FileReader();
+
+        reader.onload = (e) => {
+            const base64ImageData = e.target.result;    // Contains the base64-encoded image data
+            setCover(base64ImageData);
+            console.log('Image encoded as base64');
+        };
+
+        reader.readAsDataURL(selectedImage);            // Read the image file as data URL (base64)
+        }
+    };
 
     function submitElement() {
         console.log(`submitting element with type: ${elementType}`);
@@ -41,7 +53,7 @@ function BlogPostProvider({children}) {
         <CreateBlogPostContext.Provider value={{
             blogPostBody, setBlogPostBody,
             title, setTitle, handleTitleChange,
-            cover, setCover, handleCoverChange,
+            cover, setCover, handleCoverUpload,
 
             showAddElement, setShowAddElement, toggleShowAddElement,
             elementType, setElementType, submitElement, resetElementAfterSubmit,
@@ -61,7 +73,7 @@ function BaseElements(props){
 
     const {
         title, handleTitleChange,
-        cover, handleCoverChange
+        cover, handleCoverUpload,
     } = useContext(CreateBlogPostContext);
 
     function submitButton() {
@@ -79,9 +91,7 @@ function BaseElements(props){
                 <label for="title">Title:
                     <input type="text" id="title" name="title" value={title} onChange={handleTitleChange} required></input>
                 </label> 
-                <label for="cover">Cover:
-                    <input type="text" id="cover" name="cover" value={cover} onChange={handleCoverChange} required></input>
-                </label> 
+                <button onClick={handleCoverUpload}> Upload Cover</button>
 
             </form>
         </div>
@@ -95,7 +105,8 @@ function BlogPostAddElementsMenu(props) {
 
     const {
         showAddElement, toggleShowAddElement, 
-        elementType, setElementType
+        elementType, setElementType, 
+        title, cover, 
     
     } = useContext(CreateBlogPostContext)
 
@@ -125,6 +136,9 @@ function BlogPostAddElementsMenu(props) {
 
 
             <p> preview your content: (PLACEHOLDER) </p> 
+            
+
+
             <BodyElements/>
         </div>
     )
@@ -143,7 +157,6 @@ function BlogPostAddElementsMenu(props) {
 function TextOrHeaderFormElement(props){
     const [textInput, setTextInput] = useState('');
 
-
     const {
         elementType, resetElementAfterSubmit, 
         blogPostBody, setBlogPostBody
@@ -158,13 +171,13 @@ function TextOrHeaderFormElement(props){
 
         // add logic to submit blog post to the array
         setBlogPostBody(prevValue => [...prevValue, blogPostBodyElement]);
-        // console.log('this is the bpb:', blogPostBody)
-        // reset vals 
+
+
+        // reset var settings
         resetElementAfterSubmit();
         setTextInput('');
    
     }
-
 
     function handleInputChange(e) {
         setTextInput(e.target.value)
@@ -183,7 +196,6 @@ function TextOrHeaderFormElement(props){
                 />
             </label>
             <button type="submit" disabled={!textInput}>Add Element</button>
-            
         </form> 
     )
 }
@@ -304,11 +316,9 @@ function BodyElements(props) {
                 element = <p>{msg}</p>
                 break
             case 'imageSet':
-                // element = <p>{msg.caption}</p>
-                // console.log(msg)
-                element = <div> 
-                            <img src={msg.file} alt="uploaded" />
-                            <p>{msg.caption}</p>
+                element =   <div> 
+                                <img src={msg.file} alt="uploaded" />
+                                <p>{msg.caption}</p>
                             </div>
                 break
 
@@ -328,7 +338,6 @@ function BodyElements(props) {
     )
 }
 
-
 function formSubmit(newPost) {
     // later write the post requests here.
     fetch('/blogpost', {
@@ -344,7 +353,6 @@ function formSubmit(newPost) {
         })
         .catch((error) => console.error(error));
 };
-
 
 // currently, defauliting author to billy
 function SubmitBlogPostButton(){

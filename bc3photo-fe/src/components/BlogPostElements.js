@@ -91,7 +91,15 @@ function BaseElements(props){
                 <label for="title">Title:
                     <input type="text" id="title" name="title" value={title} onChange={handleTitleChange} required></input>
                 </label> 
-                <button onClick={handleCoverUpload}> Upload Cover</button>
+                <br></br>
+
+                <label>
+                    <input
+                        type="file"
+                        accept="image/*" // Allow only image files to be selected
+                        onChange={handleCoverUpload}
+                    />
+                </label>
 
             </form>
         </div>
@@ -136,10 +144,13 @@ function BlogPostAddElementsMenu(props) {
 
 
             <p> preview your content: (PLACEHOLDER) </p> 
-            
+            <div> 
+                {cover && <img src={cover} alt="cover-placeholder" />}
+                <h1> {title}</h1>
+                
 
-
-            <BodyElements/>
+                <BodyElements/>
+            </div>
         </div>
     )
 }
@@ -349,7 +360,7 @@ function formSubmit(newPost) {
     })
         .then((response) => {
             response.json()
-            console.log('xfer complete')
+            console.log('transfer complete')
         })
         .catch((error) => console.error(error));
 };

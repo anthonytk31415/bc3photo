@@ -4,13 +4,12 @@
 const express = require('express')
 
 
-// const {BlogPost, Kitten} = require('./models/BlogPost')
-// const {User} = require('./models/User')
-
 const {BlogPostModel} = require('./models/BlogPostModel');
 const jwt = require("jsonwebtoken"); 
 const uuid = require('uuid');
 // 
+
+
 
 // Establish Mongoose/MondoDB connection
 const mongoose = require('mongoose');
@@ -32,11 +31,17 @@ mongoose.connect(mongoPath)
 // instantiate and import 
 const app = express();
 const path = require('path');
+
+// Increase payload size limit to 50MB
+app.use(express.json({ limit: '50mb' }));
+app.use(express.urlencoded({ limit: '50mb', extended: true }));
+
 const bodyParser = require('body-parser');
 const { decode } = require('punycode');
 
 app.use(express.static(path.join(__dirname, 'build')));
 app.use(bodyParser.json());
+
 
 
 ////////////////////////////////
@@ -90,8 +95,9 @@ app.post('/blogpost', async function(req, res) {
     res.json(myResponse);
 });
 
-
-
+////////////////////////////////////////
+// sample calls below
+////////////////////////////////////////
 
 // // get top posts
 // app.get('/posts/top', authenticateToken, async function (req, res) {

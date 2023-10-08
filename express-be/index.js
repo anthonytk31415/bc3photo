@@ -8,7 +8,7 @@ const {BlogPostModel} = require('./models/BlogPostModel');
 const jwt = require("jsonwebtoken"); 
 const uuid = require('uuid');
 // 
-
+const cookieParser = require('cookie-parser');
 
 
 // Establish Mongoose/MondoDB connection
@@ -39,73 +39,120 @@ app.use(express.urlencoded({ limit: '50mb', extended: true }));
 const bodyParser = require('body-parser');
 const { decode } = require('punycode');
 
-app.use(express.static(path.join(__dirname, 'build')));
-app.use(bodyParser.json());
 
+app.use(bodyParser.json());
+app.use(cookieParser());
 
 
 ////////////////////////////////
 // route definitions
 ////////////////////////////////
 
-// get the initial html 
-app.get('/*', function (req, res) {
+app.use(express.static(path.join(__dirname, 'build')));
+
+function checkHTMLReceived(req, res, next) {
     res.sendFile(path.join(__dirname, 'build', 'index.html'));
-});
-
-
-
-function authenticateToken(req, res, next) {
-    const token = req.header('Authorization')?.split(' ')[1]; // Use optional chaining
-
-    if (!token) {
-        return res.status(401).json({ message: 'Unauthorized' });
-    }
-
-    jwt.verify(token, secretKey, (err, user) => {
-        if (err) {
-        return res.status(403).json({ message: 'Token is not valid' });     // verify if this is the right msg to send
-        }
-        req.user = user; // Attach user information to the request
-        next();
-    });
+    // res.cookie('visited', 'true');
+    console.log('sending html...')
+    next();
 }
 
-// // post for saving a post// do i want to say /posts/save? for this post request? 
-app.post('/blogpost', async function(req, res) {
-    let postData = req.body;
-    // save the body to the data base
-    // postData = addTimeToPost(postData); 
+
+// function checkHTMLReceived(req, res, next) {
+//     console.log('checking for html...');
+//     console.log(req.cookies.visited)
+//     if (!req.cookies.visited) {
+//         res.sendFile(path.join(__dirname, 'build', 'index.html'));
+//         res.cookie('visited', 'true');
+//         console.log('sending html...')
+//     }
+//     next();
+// }
 
 
+// get the initial html 
 
-    const newPost = new BlogPostModel({
-        authorId: postData.authorId, 
-        title: postData.title, 
-        date: postData.date,
-        blogBody: postData.blogBody, 
-        cover: postData.cover
-    })
+app.get('/blogdata', async function (req, res) {
 
-    await newPost.save()
+    console.log('initiating get /blog route.')
+    try {
+        const data = await BlogPostModel.find();
+        console.log('blah')
+        console.log(data);
+        res.json(data);
 
-    // console.log('heres time updated post data: ', postData);
-    // savePost(postData); 
-    let myResponse = {'response': 'Your post has been successfully saved!'}
-    res.json(myResponse);
+    } catch(e){
+    console.error('Error in GET /blogo;', e);
+    res.status(500).json({error: 'Internal Server Error'})
+    }
 });
+
+
+
+
+app.get('/*', checkHTMLReceived, function(req, res){
+    console.log('routing to next middleware...');
+});
+
+
+// // // post for saving a post// do i want to say /posts/save? for this post request? 
+// app.post('/blogpost', async function(req, res) {
+//     let postData = req.body;
+//     // save the body to the data base
+//     // postData = addTimeToPost(postData); 
+    
+//     const newPost = new BlogPostModel({
+//         authorId: postData.authorId, 
+//         title: postData.title, 
+//         date: postData.date,
+//         blogBody: postData.blogBody, 
+//         cover: postData.cover
+//     })
+
+//     await newPost.save()
+
+//     // console.log('heres time updated post data: ', postData);
+//     // savePost(postData); 
+//     let myResponse = {'response': 'Your post has been successfully saved!'}
+//     res.json(myResponse);
+// });
+
+
+
+
+
+
+
+// function authenticateToken(req, res, next) {
+//     const token = req.header('Authorization')?.split(' ')[1]; // Use optional chaining
+
+//     if (!token) {
+//         return res.status(401).json({ message: 'Unauthorized' });
+//     }
+
+//     jwt.verify(token, secretKey, (err, user) => {
+//         if (err) {
+//         return res.status(403).json({ message: 'Token is not valid' });     // verify if this is the right msg to send
+//         }
+//         req.user = user; // Attach user information to the request
+//         next();
+//     });
+// }
+
+
+
 
 ////////////////////////////////////////
 // sample calls below
 ////////////////////////////////////////
 
-// // get top posts
+// get top posts
 // app.get('/posts/top', authenticateToken, async function (req, res) {
-//     // const data = getLatestPosts(3);
 //     const data = await BlogPost.find()
 //     console.log(data)
 //     res.json(data);
 // });
+
 
 
 // // post for saving a post// do i want to say /posts/save? for this post request? 
@@ -223,11 +270,18 @@ app.post('/blogpost', async function(req, res) {
 // });
 
 
+
+
+
+
 // now lets login and generate a token
 
 
+
+
+
 // establish the BE listener
-let PORT = 3000
+let PORT = 8080
 
 app.listen(PORT, function(){
     console.log(`App running on port = ${PORT}.`)

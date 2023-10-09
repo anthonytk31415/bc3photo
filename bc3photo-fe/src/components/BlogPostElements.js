@@ -1,7 +1,11 @@
 import React, { useState, useContext } from 'react';
 import { BlogPost, BlogPostBody, BlogPostBodyElement, ImageSetData} from '../classes/BlogPost';
 
+import { BlogPostContainer } from './BlogPostContainer';
 
+import Form from 'react-bootstrap/Form';
+import Stack from 'react-bootstrap/Stack';
+import Button from 'react-bootstrap/Button';
 
 // build use context: variable manager!
 const CreateBlogPostContext = React.createContext();
@@ -77,63 +81,63 @@ function BaseElements(props){
     } = useContext(CreateBlogPostContext);
 
     function submitButton() {
-
     }
 
     return (
         <div> 
             <p> Create your elements </p>
-            <form action ={submitButton} method="POST"> 
-                <label for="author">Author:
-                    <input type="text" id="title" name="title" value="Billy" required></input>
+            <Form className="formInput">
+                <Form.Group className="mb-1" controlId="formMainElements">
+                    <Stack direction="horizontal" gap={2}>
+                        <Form.Label className="formLabel" >Author</Form.Label>
+                        <Form.Control type="text" value="Billy" required />
 
-                </label> 
-                <label for="title">Title:
-                    <input type="text" id="title" name="title" value={title} onChange={handleTitleChange} required></input>
-                </label> 
-                <br></br>
-
-                <label>
-                    <input
-                        type="file"
-                        accept="image/*" // Allow only image files to be selected
-                        onChange={handleCoverUpload}
-                    />
-                </label>
-
-            </form>
+                    </Stack>
+                    <Stack direction="horizontal" gap={2}>
+                        <Form.Label className="formLabel">Title</Form.Label>
+                        <Form.Control type="text" value={title} required onChange={handleTitleChange}/>
+                    </Stack>
+                    <Stack direction="horizontal" gap={2}>
+                        <Form.Label className="formLabel">Upload Cover</Form.Label>
+                        <Form.Control type="file" accept="image/*" onChange={handleCoverUpload}/>
+                    </Stack>
+                </Form.Group>
+            </Form>
         </div>
-
     )
 }
 
 // build menu for adding content elements
-
 function BlogPostAddElementsMenu(props) {
 
     const {
         showAddElement, toggleShowAddElement, 
         elementType, setElementType, 
-        title, cover, 
-    
-    } = useContext(CreateBlogPostContext)
+        title, cover, blogPostBody,
+        } = useContext(CreateBlogPostContext)
 
     const handleElementChange = (e) => {
         setElementType(e.target.value);
-      };
+        };
     
     return (
         <div>
             <p> Add Content Menu </p>
-            <button onClick={toggleShowAddElement} > {showAddElement ? "Remove Content" : "Add Content"} + </button>
+            <Button onClick={toggleShowAddElement} > {showAddElement ? "Remove Content -" : "Add Content +"}</Button>
             {showAddElement && <div> 
-                <select value={elementType} onChange={handleElementChange}>
-                    <option value="">Select a blog element</option>
-                    <option value="h3">h3</option>
-                    <option value="h4">h4</option>
-                    <option value="text">text</option>
-                    <option value="imageSet">imageSet</option>
-                </select>
+
+                <Form className="formInput">
+                    <Stack direction="horizontal" gap={2}> 
+                        <Form.Label className="formLabel">Select element</Form.Label>
+                        <Form.Control as="select" value={elementType} onChange={handleElementChange}>
+                            <option>Select an Element</option>
+                            <option>h3</option>
+                            <option>h4</option>
+                            <option>text</option>
+                            <option>imageSet</option>
+                        </Form.Control>
+                    </Stack>
+                </Form>
 
                 <div> 
                     {(elementType === "h3" || elementType === "h4" || elementType === "text")&& < TextOrHeaderFormElement /> }
@@ -141,16 +145,8 @@ function BlogPostAddElementsMenu(props) {
                 </div>
             </div>}
 
-
-
             <p> preview your content: (PLACEHOLDER) </p> 
-            <div> 
-                {cover && <img src={cover} alt="cover-placeholder" />}
-                <h1> {title}</h1>
-                
-
-                <BodyElements/>
-            </div>
+            <BlogPostContainer title={title} cover={cover} blogPostBody={blogPostBody}/>
         </div>
     )
 }
@@ -173,7 +169,7 @@ function TextOrHeaderFormElement(props){
         blogPostBody, setBlogPostBody
     } = useContext(CreateBlogPostContext)
 
-    function handleSubmit(e) {
+    function handleElementSubmit(e) {
         e.preventDefault();
 
         let blogPostBodyElement = new BlogPostBodyElement(
@@ -183,11 +179,9 @@ function TextOrHeaderFormElement(props){
         // add logic to submit blog post to the array
         setBlogPostBody(prevValue => [...prevValue, blogPostBodyElement]);
 
-
         // reset var settings
         resetElementAfterSubmit();
         setTextInput('');
-   
     }
 
     function handleInputChange(e) {
@@ -195,19 +189,17 @@ function TextOrHeaderFormElement(props){
     }
 
     return (
-        <form onSubmit={handleSubmit}> Input Text/Header
-            <label for="textInput">    
-                <textarea 
-                    id = "textInput"
-                    name = "textInput"
-                    value = {textInput}
-                    onChange = {handleInputChange}
-                    rows={4}
-                    cols={40}                
-                />
-            </label>
-            <button type="submit" disabled={!textInput}>Add Element</button>
-        </form> 
+        <div>
+            <Form className="formInput" onSubmit={handleElementSubmit}>
+                <Stack direction="horizontal" gap={2}> 
+                    <Form.Label className="formLabel"> Input Text
+                    </Form.Label>
+                    <Form.Control rows={3}value={textInput} onChange={handleInputChange} as="textarea" />
+                </Stack>
+                <Button type="submit" disabled={!textInput}>Submit Element</Button>
+            </Form>
+
+        </div>
     )
 }
 
@@ -217,7 +209,6 @@ function ImageSetElement(props){
     const [caption, setCaption] = useState('');
 
     const [image, setImage] = useState(null);
-
 
     const {elementType, resetElementAfterSubmit, setBlogPostBody
         } = useContext(CreateBlogPostContext)
@@ -269,86 +260,31 @@ function ImageSetElement(props){
 
 
     return (
-        
-        <form onSubmit={handleImageSetElementSubmit}> 
-            <label for="filenameInput">File name
-                <input 
-                    id = "filename"
-                    name = "filename"
-                    value = {filename}
-                    onChange = {handleFilenameInput}               
-                />
-            </label>
-            <br></br>
-            <label>
-                <input
-                    type="file"
-                    accept="image/*" // Allow only image files to be selected
-                    onChange={handleImageUpload}
-                />
-            </label>
+        <div>
+            <Form className="formInput" onSubmit={handleImageSetElementSubmit}>
+                <Form.Group className="mb-1" controlId="formMainElements">
+                    <Stack direction="horizontal" gap={2}>
+                        <Form.Label className="formLabel" >Filename</Form.Label>
+                        <Form.Control type="text" value={filename} required onChange={handleFilenameInput} />
+                    </Stack>
+                    <Stack direction="horizontal" gap={2}>
+                        <Form.Label className="formLabel" >Upload Image</Form.Label>
+                        <Form.Control type="file" accept="image/*" required onChange={handleImageUpload} />
+                    </Stack>
+                    <Stack direction="horizontal" gap={2}>
+                        <Form.Label className="formLabel" >Caption</Form.Label>
+                        <Form.Control type="text" value = {caption} required onChange={handleCaptionChange} />
+                    </Stack>
+                    <Button type="submit" disabled={!caption || !filename}>Add Element</Button>
+                </Form.Group>
 
-
-            <label for="caption">Caption
-                <textarea 
-                    id = "caption"
-                    name = "caption"
-                    value = {caption}
-                    onChange = {handleCaptionChange}
-                    rows={4}
-                    cols={40}                
-                />
-            </label>
-            <button type="submit" disabled={!caption || !filename}>Add Element</button>
-        </form> 
-    )
-}
-
-
-// given an array, return the elementsl
-
-function BodyElements(props) {
-    
-    const {blogPostBody} = useContext(CreateBlogPostContext);
-
-    let arr = []
-    for (let i = 0; i < blogPostBody.length; i ++) {
-        let element; 
-        let entry = blogPostBody[i]
-        let msg = entry.data
-        switch (entry.type) {
-            case 'h3': 
-                element = <h3>{msg}</h3>
-                break
-            case 'h4': 
-                element = <h4>{msg}</h4>
-                break
-            case 'text': 
-                element = <p>{msg}</p>
-                break
-            case 'imageSet':
-                element =   <div> 
-                                <img src={msg.file} alt="uploaded" />
-                                <p>{msg.caption}</p>
-                            </div>
-                break
-
-            default: 
-                element = null
-        }
-
-        if (element) {
-            arr.push(element);
-        }
-            
-    }
-    return (
-        <div> 
-            {arr}
+            </Form>
         </div>
     )
 }
 
+
+// write the post to the backend
 function formSubmit(newPost) {
     // later write the post requests here.
     fetch('/blogpost', {
@@ -365,7 +301,7 @@ function formSubmit(newPost) {
         .catch((error) => console.error(error));
 };
 
-// currently, defauliting author to billy
+// Button to initiate the Post
 function SubmitBlogPostButton(){
     const author = "Billy"
     const {
@@ -386,7 +322,7 @@ function SubmitBlogPostButton(){
 
     return (
         <div>
-            <button onClick={handleSubmit}> Submit your post</button>
+            <Button onClick={handleSubmit}> Submit post</Button>
         </div>
     )
 }
@@ -394,6 +330,6 @@ function SubmitBlogPostButton(){
 export { 
     BlogPostProvider, BaseElements,
     TextOrHeaderFormElement, BlogPostAddElementsMenu, 
-    ImageSetElement, BodyElements, 
-    SubmitBlogPostButton
+    ImageSetElement, 
+    SubmitBlogPostButton, CreateBlogPostContext
 }

@@ -25,12 +25,11 @@ import {ImageSetElement, BlogPostProvider, BaseElements,
 // do i need to input somethign where it'll submit the thing into the object?
 
 
-
 function CreateBlogPostMenu() {
 
     return (
         <BlogPostProvider>
-        <div> 
+        <div className="BlogPostProviderContainer"> 
             <BaseElements/>
             <BlogPostAddElementsMenu/>
             <SubmitBlogPostButton/>

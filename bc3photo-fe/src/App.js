@@ -14,17 +14,17 @@ function App() {
     <BrowserRouter className="router">
       <div className="app">
         <Menu/>
-        <div className='main'> 
-            <Routes> 
-              <Route key="/" path="/" element={ <FrontPage/> } />
-              <Route key="/galleries" path="/galleries" element={ <Galleries/> } />
-              <Route key="/about" path="/about" element={ <About/> } />
-              <Route key="/blog" path="/blog" element={ <Blog/> } />
-              <Route key="/faq" path="/faq" element={ <Faq/> } />
-            </Routes> 
+          <div className='main'> 
+              <Routes> 
+                <Route key="/" path="/" element={ <FrontPage/> } />
+                <Route key="/galleries" path="/galleries" element={ <Galleries/> } />
+                <Route key="/about" path="/about" element={ <About/> } />
+                <Route key="/blog" path="/blog" element={ <Blog/> } />
+                <Route key="/faq" path="/faq" element={ <Faq/> } />
+              </Routes> 
 
-        </div>
-        <BottomRibbon/>
+          </div>
+          <BottomRibbon/>
       </div>
 
 

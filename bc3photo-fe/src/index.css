@@ -12,10 +12,15 @@ code {
     monospace;
 } */
 
+.main {
+  padding: 20px;
+}
+
 * {
   padding: 0;
   margin: 0;
 }
+
 html, body, .app, .router {
   background-color: lightblue; /* #333*/
   margin: 0;
@@ -133,3 +138,69 @@ html, body, .app, .router {
 
 /* .carousel .carousel-control { visibility: hidden; }
 .carousel:hover .carousel-control { visibility: visible; } */
+
+
+/* // 550px width is cutoff */
+.blogPostPreview-container {
+  display: flex; 
+  flex-direction: center;
+  justify-content: center;
+}
+
+@media (min-width: 550px) {
+  .blogPostPreview-container {
+    flex-direction: row; /* When screen width is >= 550px, align elements horizontally */
+    justify-content: space-between; /* Add space between the elements */
+    align-items: center; /* Center elements vertically within the parent */
+  }
+
+  .blogPostPreview-imgCover{
+    aspect-ratio: auto 600 / 337;
+    max-width: 50%;                                                                                                                                                            
+  }
+}
+
+
+.blogPostPreview-imgCover{
+  aspect-ratio: auto 600 / 337;
+}
+
+.blogPostPreview-textContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+
+}
+
+
+.formLabel {
+  width: 160px;
+}
+
+.formInput {
+  max-width: 100%;
+  background-color: lightgreen;
+}
+
+
+
+@media only screen and (min-width: 600px) {
+  .formInput {
+    max-width: 800px; 
+  }
+}
+
+
+
+.blogPostPreviewDate {
+  font-size: 12px;
+  font-weight: lighter;
+}
+
+.BlogPostProviderContainer {
+  background-color: bisque;
+  border: solid gray 1px;
+  border-radius: 8px;
+  padding: 10px;
+}

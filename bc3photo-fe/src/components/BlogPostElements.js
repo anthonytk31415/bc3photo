@@ -89,16 +89,16 @@ function BaseElements(props){
             <Form className="formInput">
                 <Form.Group className="mb-1" controlId="formMainElements">
                     <Stack direction="horizontal" gap={2}>
-                        <Form.Label className="formLabel" >Author</Form.Label>
+                        <label className="formLabel" >Author</label>
                         <Form.Control type="text" value="Billy" required />
 
                     </Stack>
                     <Stack direction="horizontal" gap={2}>
-                        <Form.Label className="formLabel">Title</Form.Label>
+                        <label className="formLabel">Title</label>
                         <Form.Control type="text" value={title} required onChange={handleTitleChange}/>
                     </Stack>
                     <Stack direction="horizontal" gap={2}>
-                        <Form.Label className="formLabel">Upload Cover</Form.Label>
+                        <label className="formLabel">Upload Cover</label>
                         <Form.Control type="file" accept="image/*" onChange={handleCoverUpload}/>
                     </Stack>
                 </Form.Group>
@@ -128,7 +128,7 @@ function BlogPostAddElementsMenu(props) {
 
                 <Form className="formInput">
                     <Stack direction="horizontal" gap={2}> 
-                        <Form.Label className="formLabel">Select element</Form.Label>
+                        <label className="formLabel">Select element</label>
                         <Form.Control as="select" value={elementType} onChange={handleElementChange}>
                             <option>Select an Element</option>
                             <option>h3</option>
@@ -145,8 +145,7 @@ function BlogPostAddElementsMenu(props) {
                 </div>
             </div>}
 
-            <p> preview your content: (PLACEHOLDER) </p> 
-            <BlogPostContainer title={title} cover={cover} blogPostBody={blogPostBody}/>
+            
         </div>
     )
 }

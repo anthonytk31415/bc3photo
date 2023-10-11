@@ -3,9 +3,9 @@ import {CreateBlogPostContext} from './BlogPostElements'
 
 
 
-function BlogPostBodyContainer({blogPostBody}) {
+function BlogPostBodyContainer() {
     
-    // const {blogPostBody} = useContext(CreateBlogPostContext);
+    const {blogPostBody} = useContext(CreateBlogPostContext);
 
     let arr = []
     for (let i = 0; i < blogPostBody.length; i ++) {
@@ -20,12 +20,12 @@ function BlogPostBodyContainer({blogPostBody}) {
                 element = <h4>{msg}</h4>
                 break
             case 'text': 
-                element = <p>{msg}</p>
+                element = <p className="txtBlog">{msg}</p>
                 break
             case 'imageSet':
-                element =   <div> 
+                element =   <div className="imgBlogContainer"> 
                                 <img src={msg.file} alt="uploaded" />
-                                <p>{msg.caption}</p>
+                                <p className="imgBlogCaption" >{msg.caption}</p>
                             </div>
                 break
 
@@ -49,15 +49,21 @@ function BlogPostBodyContainer({blogPostBody}) {
 // BlogPostContainer will be rendered for the preview and 
 // for the blog post. 
 
-function BlogPostContainer({title, cover, blogPostBody }) {
-
+function BlogPostContainer() {
+    const {title, cover} =useContext(CreateBlogPostContext);
     return (
         <div className="blogPostContainer"> 
-            {cover && <img src={cover} alt="cover-placeholder" />}
-            <h1> {title}</h1>
-        
-
-            <BlogPostBodyContainer blogPostBody={blogPostBody}/>
+            <h1 className="blogTitle"> {title}</h1>
+            {title && 
+                <div> 
+                    <div className="gap1"/>
+                    <div className="titleBar"/> 
+                    <div className="gap1"/> 
+                </div>}
+            <div className="imgBlogContainer"> 
+            {cover && <img src={cover} alt="cover-placeholder" className="imgBlog"/>}
+            </div>
+            <BlogPostBodyContainer />
         </div>
     )
 }

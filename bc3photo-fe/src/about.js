@@ -12,12 +12,12 @@ const aboutBilly = [
 
 let blurb = []
 for (let i = 0; i < aboutBilly.length; i ++ ){
-    blurb.push(<p className='about'>{aboutBilly[i]}</p>)
+    blurb.push(<p className='txtBlog'>{aboutBilly[i]}</p>)
 }
 
 function About() {
     return (
-        <div>
+        <div className='blogPostContainer'>
             {blurb}
         </div>
     )

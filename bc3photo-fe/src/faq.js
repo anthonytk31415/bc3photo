@@ -7,7 +7,7 @@ function Faq() {
     return (
         <div>
             <p> This is my FAQ.</p>
-            <CreateBlogPostMenu></CreateBlogPostMenu>
+            <CreateBlogPostMenu/>
 
         </div>
     )

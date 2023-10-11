@@ -2,8 +2,9 @@ import React, { useState } from 'react';
 import { BlogPost, BlogPostBody } from './classes/BlogPost';
 import {ImageSetElement, BlogPostProvider, BaseElements,
         TextOrHeaderFormElement, BlogPostAddElementsMenu,
-        SubmitBlogPostButton } from './components/BlogPostElements';
+        SubmitBlogPostButton,  } from './components/BlogPostElements';
 
+import {BlogPostContainer} from './components/BlogPostContainer'
 
 // you'll need to make a context for the post elements so everytime you add element, you add that 
 // to the input array and the object changes and
@@ -29,11 +30,14 @@ function CreateBlogPostMenu() {
 
     return (
         <BlogPostProvider>
-        <div className="BlogPostProviderContainer"> 
-            <BaseElements/>
-            <BlogPostAddElementsMenu/>
-            <SubmitBlogPostButton/>
-        </div> 
+            <div className="BlogPostProviderContainer"> 
+                <BaseElements/>
+                <BlogPostAddElementsMenu/>
+                <SubmitBlogPostButton/>
+
+            </div> 
+            <p> preview your content: (PLACEHOLDER) </p> 
+            <BlogPostContainer />
         </BlogPostProvider>
     )
 }

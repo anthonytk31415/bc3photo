@@ -12,6 +12,8 @@ code {
     monospace;
 } */
 
+
+
 .main {
   padding: 20px;
 }
@@ -19,6 +21,7 @@ code {
 * {
   padding: 0;
   margin: 0;
+  font-family: Lato, sans-serif;
 }
 
 html, body, .app, .router {
@@ -171,16 +174,24 @@ html, body, .app, .router {
   justify-content: flex-start;
   align-items: center;
 
+
 }
+
 
 
 .formLabel {
   width: 160px;
+  padding-left: 8px;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
 }
 
 .formInput {
   max-width: 100%;
   background-color: lightgreen;
+
 }
 
 
@@ -203,4 +214,51 @@ html, body, .app, .router {
   border: solid gray 1px;
   border-radius: 8px;
   padding: 10px;
+}
+
+
+.blogPostContainer {
+  background-color: lightyellow;
+  border: solid gray 1px;
+  border-radius: 8px;
+  padding: 20px 10px 20px 10px;
+
+}
+
+
+.blogTitle {
+  font-size: x-large;
+
+  font-style: normal;
+  font-family: Lato, sans-serif;
+  margin: 0;
+}
+
+.gap1 {
+  height: 10px;
+}
+.titleBar {
+  width: 40px;
+  height: 3px;
+  border: solid lightgray 2px;
+}
+
+.imgBlog {
+  padding: 20px 0 20px 0; 
+}
+
+.imgBlogContainer {
+  display: flex; 
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.txtBlog {
+  font-size: medium;
+}
+
+.imgBlogCaption {
+  color: gray;
+  font-size: small;
 }

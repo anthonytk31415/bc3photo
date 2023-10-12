@@ -3,8 +3,10 @@
 // 
 const express = require('express')
 
-
+// mondodb models
 const {BlogPostModel} = require('./models/BlogPostModel');
+const {ImageModel} = require('./models/ImageModel');
+
 const jwt = require("jsonwebtoken"); 
 const uuid = require('uuid');
 // 
@@ -94,33 +96,47 @@ app.get('/*', checkHTMLReceived, function(req, res){
     console.log('routing to next middleware...');
 });
 
-
 // // // post for saving a post// do i want to say /posts/save? for this post request? 
-// app.post('/blogpost', async function(req, res) {
-//     let postData = req.body;
-//     // save the body to the data base
-//     // postData = addTimeToPost(postData); 
+app.post('/blogpost', async function(req, res) {
+    let postData = req.body;
+    // save the body to the data base
+    // postData = addTimeToPost(postData); 
     
-//     const newPost = new BlogPostModel({
-//         authorId: postData.authorId, 
-//         title: postData.title, 
-//         date: postData.date,
-//         blogBody: postData.blogBody, 
-//         cover: postData.cover
+    const newPost = new BlogPostModel({
+        authorId: postData.authorId, 
+        title: postData.title, 
+        date: postData.date,
+        blogBody: postData.blogBody, 
+        cover: postData.cover
+    })
+
+    await newPost.save()
+
+    // console.log('heres time updated post data: ', postData);
+    // savePost(postData); 
+    let myResponse = {'response': 'Your post has been successfully saved!'}
+    res.json(myResponse);
+});
+
+
+
+// app.post('/image', async function(req, res) {
+//     let data = req.body;
+//     const now = new Date();
+//     const timestamp = now.toISOString();
+//     const newImage = new ImageModel({
+//         filename: data.filename,
+//         file: data.file,
+//         date: timestamp
 //     })
 
-//     await newPost.save()
+//     await newImage.save()
 
 //     // console.log('heres time updated post data: ', postData);
 //     // savePost(postData); 
 //     let myResponse = {'response': 'Your post has been successfully saved!'}
 //     res.json(myResponse);
 // });
-
-
-
-
-
 
 
 // function authenticateToken(req, res, next) {

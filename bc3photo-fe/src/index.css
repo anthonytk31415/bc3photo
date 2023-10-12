@@ -259,6 +259,16 @@ html, body, .app, .router {
   background-color: yellow;
 }
 
+.login-welcome {
+  margin: 8px 0 8px 0;
+  font-size: x-large;
+}
+
+.account-title-mid-header {
+  margin: 4px 0 4px 0;
+  font-size: medium;
+}
+
 .login-body, .account-body{
   max-height: calc(100% - 50px);
   overflow-y: auto;
@@ -272,6 +282,7 @@ html, body, .app, .router {
 .account-body-container {
   /* background-color: aqua; */
   width: 100%;
+  margin: 0;
 }
 
 .inputRect {
@@ -302,7 +313,7 @@ html, body, .app, .router {
   background-color: transparent;
   width: 97%;
   height: 14px;
-  font-size: 10px;
+  font-size: xx-small;
   padding: 1px 0 1px 1px;
   margin: 0;
 
@@ -416,7 +427,7 @@ html, body, .app, .router {
 
 .formButton {
   font-weight: bold;
-  font-size: 16px;
+  font-size: large;
   border-radius: 6px;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -478,10 +489,9 @@ html, body, .app, .router {
 
 .CheckBoxShowPassword {
   display: flex;
-  flex-direction: row;
   align-items: center;
-  height: 16px;
-  width: 120px;
+  justify-content: flex-start;
+  margin-left: 3px;
 }
 
 .CheckBoxShowPassword-img {
@@ -495,9 +505,23 @@ html, body, .app, .router {
 }
 
 .CheckBoxShowPassword-text {
-  font-size: 14px;
+  font-size: small;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin: 0;
+
+  padding-left: 3px;
+
 }
 
+.showInputError-text {
+
+  margin: 0;
+  color: red;
+  font-size: small;
+  padding-left: 3px;
+}
 
 
 
@@ -508,6 +532,9 @@ html, body, .app, .router {
   flex-direction: column;
 }
 
+.loginMenu > :not(:last-child) {
+  margin-bottom: 10px; /* Add a 10px gap between child elements */
+}
 /** signup **/
 
 
@@ -533,3 +560,4 @@ html, body, .app, .router {
 .show-background {
   opacity: 1;
 }
+

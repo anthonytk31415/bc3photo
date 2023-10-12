@@ -9,6 +9,8 @@ import { BottomRibbon } from './bottomRibbon';
 import { Faq } from './faq';
 import { Blog } from './blog';
 
+import {LoginPage} from './login';
+import {SignupPage} from './signup';
 import { LoginContextProvider } from './providers/LoginContextProvider';
 
 
@@ -25,6 +27,8 @@ function App() {
                   <Route key="/about" path="/about" element={ <About/> } />
                   <Route key="/blog" path="/blog" element={ <Blog/> } />
                   <Route key="/faq" path="/faq" element={ <Faq/> } />
+                  <Route key='login' path='login' element={<LoginPage/>}/> 
+                  <Route key="signup" path="signup" element={<SignupPage />} />
                 </Routes> 
 
             </div>

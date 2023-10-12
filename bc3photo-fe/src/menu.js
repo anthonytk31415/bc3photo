@@ -29,9 +29,8 @@ function Menu() {
                 <img className="socialMediaLink icon-invert-color cartSize" src="/images/links/shopping-cart.png" alt="na" /> 
             </Link>
 
-            <Link to= "/#"> 
-                <AccountSettingsIcon />
-            </Link>
+            <AccountSettingsIcon />
+
 
 
         </div>

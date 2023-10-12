@@ -93,20 +93,20 @@ function LoginMenu(){
                 <label> 
 
                     <CustomFormInput
-                            name="email-input"
-                            type="Email"
-                            value={email}
-                            onChangeFn = {handleEmailChange}
-                            onBlurFn ={handleEmailBlur}
-                            onFocusFn ={handleEmailEntryFocus}
-                            placeholder = 'Enter your email'
-                            pattern = "^[^\s@]+@[^\s@]+\.[^\s@]+$"
-                            className = "inputText"
+                        name="email-input"
+                        type="Email"
+                        value={email}
+                        onChangeFn = {handleEmailChange}
+                        onBlurFn ={handleEmailBlur}
+                        onFocusFn ={handleEmailEntryFocus}
+                        placeholder = 'Enter your email'
+                        pattern = "^[^\s@]+@[^\s@]+\.[^\s@]+$"
+                        className = "inputText"
                     />
                     
                 </label>
-                {emailError && <p style={{color: 'red', fontSize: '12px'}}>{emailError}</p>}
-                {!emailError && <div style={{height: '10px'}}></div>}
+                {emailError && <p className="showInputError-text">{emailError}</p>}
+                {/* {!emailError && <div style={{height: '10px'}}></div>} */}
 
                 <label>
 
@@ -123,11 +123,11 @@ function LoginMenu(){
                     />
 
                 </label>
-                <div style={{height: '12px', backgroundColor: 'transparent'}}/>
+                {/* <div style={{height: '12px', backgroundColor: 'transparent'}}/> */}
                 <CheckBoxShowPassword showPassword={showPassword} toggleShowPassword={toggleShowPassword}/>
                 {/* <div style={{height: '10px'}}/> */}
-                {passwordError && <p style={{color: 'red', fontSize: '12px', backgroundColor: 'transparent'}}>{passwordError}</p>}
-                {!passwordError && <div style={{height: '10px'}}/>}
+                {passwordError && <p className="showInputError-text">{passwordError}</p>}
+                {/* {!passwordError && <div style={{height: '10px'}}/>} */}
 
                 <button type='submit' className='formButton'>Continue</button>
             </form> 

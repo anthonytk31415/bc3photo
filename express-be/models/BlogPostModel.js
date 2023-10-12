@@ -22,7 +22,7 @@ const ImageSetDataSchema = new Schema ({
 const BlogPostSchema = new Schema ({
     authorId: String, 
     title: String, 
-    date: Date, 
+    date: Date,  
     blogBody: [BlogPostBodyElementSchema], 
     cover: String
 

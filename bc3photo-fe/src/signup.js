@@ -95,8 +95,8 @@ function SignupMenu() {
                     />
 
                 </label>
-                {emailError && <p style={{color: 'red', fontSize: '12px'}}>{emailError}</p>}
-                {!emailError && <div style={{height: '10px'}}></div>}
+                {emailError && <p className="showInputError-text">{emailError}</p>}
+
 
                 <label>
 
@@ -113,8 +113,8 @@ function SignupMenu() {
                     />
 
                 </label>
-                {passwordError && <p style={{color: 'red', fontSize: '12px'}}>{passwordError}</p>}
-                {!passwordError && <div style={{height: '10px'}}></div>}
+                {passwordError && <p className="showInputError-text">{passwordError}</p>}
+
 
                 <label>
 
@@ -133,11 +133,9 @@ function SignupMenu() {
 
                 </label>
                 
-                <div style={{height: '12px', backgroundColor: 'transparent'}}/>
                 <CheckBoxShowPassword showPassword={showPassword} toggleShowPassword={toggleShowPassword}/>
 
-                {passwordConfirmError && <p style={{color: 'red', fontSize: '12px'}}>{passwordConfirmError}</p>}
-                {!passwordConfirmError && <div style={{height: '10px'}}></div>}
+                {passwordConfirmError && <p className='showInputError-text'>{passwordConfirmError}</p>}
 
                 <button disabled={!(!emailError && !passwordError && !passwordConfirmError)} type='submit' className='formButton'>Sign Up</button>
             </form> 

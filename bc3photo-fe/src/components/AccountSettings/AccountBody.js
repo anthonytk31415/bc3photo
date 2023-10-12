@@ -12,7 +12,7 @@ function AccountBody({
     return (
         <div className = "account-body"> 
             <div className = "account-body-container">
-                <h3>Welcome to Howler</h3>
+                <h3 className="login-welcome" >Welcome to BC3 Photography</h3>
                 <ChildComponent className = {childClassName}/> 
                 <br></br>
                 <div >

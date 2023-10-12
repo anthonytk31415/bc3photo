@@ -11,7 +11,7 @@ function AccountTitle ({title, closeLoginWindowFn}) {
                 </div>
             </div>
             <div className='account-title-mid'>
-                <h4>{title}</h4>
+                <h4 className='account-title-mid-header'>{title}</h4>
             </div>
             <div className='account-title-right'></div>
         </div>

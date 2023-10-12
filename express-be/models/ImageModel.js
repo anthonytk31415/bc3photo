@@ -5,12 +5,12 @@ const Schema = mongoose.Schema;
 const ImageSchema = new Schema ({
     filename: String, 
     file: String, 
-    date: date
+    date: Date,
 }, {
     collection: 'images'
 });
 
-const BlogPostModel = mongoose.model('image', ImageSchema)
+const ImageModel = mongoose.model('image', ImageSchema)
 
 module.exports =  {
     ImageModel,

@@ -1,5 +1,7 @@
 import React from 'react';
 import { Link, BrowserRouter, Routes, Route } from "react-router-dom";
+import { AccountSettingsIcon } from './components/AccountSettings/AccountSettingsIcon';
+
 
 
 function Menu() {
@@ -26,6 +28,12 @@ function Menu() {
             <Link to= "/cart"> 
                 <img className="socialMediaLink icon-invert-color cartSize" src="/images/links/shopping-cart.png" alt="na" /> 
             </Link>
+
+            <Link to= "/#"> 
+                <AccountSettingsIcon />
+            </Link>
+
+
         </div>
     )
 }

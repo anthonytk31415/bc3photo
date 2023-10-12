@@ -9,22 +9,27 @@ import { BottomRibbon } from './bottomRibbon';
 import { Faq } from './faq';
 import { Blog } from './blog';
 
+import { LoginContextProvider } from './providers/LoginContextProvider';
+
+
 function App() {
   return (
     <BrowserRouter className="router">
       <div className="app">
-        <Menu/>
-          <div className='main'> 
-              <Routes> 
-                <Route key="/" path="/" element={ <FrontPage/> } />
-                <Route key="/galleries" path="/galleries" element={ <Galleries/> } />
-                <Route key="/about" path="/about" element={ <About/> } />
-                <Route key="/blog" path="/blog" element={ <Blog/> } />
-                <Route key="/faq" path="/faq" element={ <Faq/> } />
-              </Routes> 
+        <LoginContextProvider>
+          <Menu/>
+            <div className='main'> 
+                <Routes> 
+                  <Route key="/" path="/" element={ <FrontPage/> } />
+                  <Route key="/galleries" path="/galleries" element={ <Galleries/> } />
+                  <Route key="/about" path="/about" element={ <About/> } />
+                  <Route key="/blog" path="/blog" element={ <Blog/> } />
+                  <Route key="/faq" path="/faq" element={ <Faq/> } />
+                </Routes> 
 
-          </div>
-          <BottomRibbon/>
+            </div>
+            <BottomRibbon/>
+          </LoginContextProvider>
       </div>
 
 

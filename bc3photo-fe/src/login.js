@@ -8,8 +8,6 @@ import { CustomFormInput } from './components/AccountSettings/CustomFormInput';
 import { AccountBody } from './components/AccountSettings/AccountBody';
 import { CheckBoxShowPassword } from './components/AccountSettings/CheckBoxShowPassword';
 
-
-
 import { LoginContext, LoginContextProvider } from './providers/LoginContextProvider';
 
 function fetchLogin(newLogin) {

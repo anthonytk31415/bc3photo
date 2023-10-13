@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from 'react';
-import { BlogEntries } from './components/BlogEntries';
+import { BlogEntries } from './components/BlogPost/BlogEntries';
 
 
 function Blog() {

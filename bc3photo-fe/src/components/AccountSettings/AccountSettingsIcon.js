@@ -4,6 +4,7 @@ import { Routes, Route, Link } from 'react-router-dom';
 import { LoginPage} from  '../../login';
 import { SignupPage} from  '../../signup';
 import { LoginContext } from "../../providers/LoginContextProvider"
+import { CreateBlogPost } from '../../createBlogPost';
 
 function AccountSettingsIcon() {
 
@@ -32,22 +33,23 @@ function AccountSettingsIcon() {
         }
     }
 
+    function toggleBlogPost(e) {
+        // close the account-settings menu
+        setShowAccountSettings(false);
+    }
+
     useEffect(() =>  {
         const handleClickOutside = (e) => {
             if (divRef.current && !divRef.current.contains(e.target)){
                 setShowAccountSettings(false);
             }
         }; 
-
         document.addEventListener('click', handleClickOutside);
-
 
         return () => {
             document.removeEventListener('click', handleClickOutside);
         };
-
     }, []); 
-
 
     return (
         <div> 
@@ -69,6 +71,12 @@ function AccountSettingsIcon() {
                                     </Link>
                                     
                                 </div>
+                                <div> 
+                                    <p className="boxLinkText">  Admin Stuff </p> 
+                                    <Link className={'boxTextContainer'} to="/createblogpost" onClick={toggleBlogPost} > 
+                                        <p className="boxLinkText">Create Blog Post</p>
+                                    </Link>
+                                </div>
                             </div>
                         )}
 
@@ -87,12 +95,12 @@ function AccountSettingsIcon() {
                                 </div>
                             </div>
                         )}
-
                     </div>
 
                 <Routes>
                     <Route key='login' path='/login' element={<LoginPage/>}/> 
                     <Route key='signup' path='/signup' element={<SignupPage/>}/> 
+                    <Route key='createblogpost' path='/signup' createblogpost={<CreateBlogPost/>}/> 
                 </Routes>
             
             </div>

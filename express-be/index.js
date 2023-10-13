@@ -283,8 +283,7 @@ app.post('/login', async function(req, res, next) {
         .status(201)
         .json({
             success: true, 
-            data: { user_id: existingUser._id, 
-                    email: existingUser.email, 
+            data: { 
                     token: token
             },
 

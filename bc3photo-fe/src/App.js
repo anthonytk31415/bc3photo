@@ -12,7 +12,7 @@ import { Blog } from './blog';
 import {LoginPage} from './login';
 import {SignupPage} from './signup';
 import { LoginContextProvider } from './providers/LoginContextProvider';
-
+import { CreateBlogPost } from './createBlogPost'
 
 function App() {
   return (
@@ -29,6 +29,7 @@ function App() {
                   <Route key="/faq" path="/faq" element={ <Faq/> } />
                   <Route key='login' path='login' element={<LoginPage/>}/> 
                   <Route key="signup" path="signup" element={<SignupPage />} />
+                  <Route key="createblogpost" path="createblogpost" element={< CreateBlogPost />} />
                 </Routes> 
 
             </div>

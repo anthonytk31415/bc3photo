@@ -369,23 +369,31 @@ html, body, .app, .router {
 }
 
 .boxTextContainer {
-  font-size: small;
   text-decoration: none;
   color: black;
   /* padding: 5px 0 5px 0; */
   width: 100%;
+  height: auto;
   display: flex;
   flex-direction: row;
-  align-content: flex-start;
+  align-content: center;
+  margin: 0;
+
 }
 
 .boxDivider {
-  border-bottom: 0.5px solid rgb(239, 239, 239);
+  border-bottom: 0.5px solid lightgray;
   width: 100%;
 }
 
 .boxLinkText {
   padding-left: 7px;
+  font-size: small;
+  display: flex;
+  flex-direction: row;
+  align-content: center;
+  margin: 5px 0 5px 0;
+
 }
 
 .boxTextContainer:hover {
@@ -396,7 +404,7 @@ html, body, .app, .router {
 .box {
   position: absolute;
   width: 100px;
-  height: 100px;
+  height: auto;
   background-color: white;
   top: calc(100% + 5px); /* 10px below the bottom of div1 */
   right: 0; /* Right-most alignment */

@@ -2,12 +2,12 @@ import React, { useState } from 'react';
 import { BlogPost, BlogPostBody } from './classes/BlogPost';
 import {ImageSetElement, BaseElements,
         TextOrHeaderFormElement, BlogPostAddElementsMenu,
-        SubmitBlogPostButton,  } from './components/BlogPostElements';
+        SubmitBlogPostButton,  } from './components/BlogPost/BlogPostElements';
 
 import { BlogPostProvider } from './providers/BlogPostProvider'
 
 
-import {BlogPostContainer} from './components/BlogPostContainer'
+import {BlogPostContainer} from './components/BlogPost/BlogPostContainer'
 
 // you'll need to make a context for the post elements so everytime you add element, you add that 
 // to the input array and the object changes and
@@ -27,10 +27,7 @@ import {BlogPostContainer} from './components/BlogPostContainer'
 // do i need to input somethign where it'll submit the thing into the object?
 
 
-function CreateBlogPostMenu() {
-
-
-
+function CreateBlogPost() {
     return (
         <BlogPostProvider>
             <div className="BlogPostProviderContainer"> 
@@ -47,4 +44,4 @@ function CreateBlogPostMenu() {
 
 
 
-export { CreateBlogPostMenu }
+export { CreateBlogPost }

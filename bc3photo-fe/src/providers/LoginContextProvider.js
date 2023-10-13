@@ -3,10 +3,13 @@ import React, {useState } from 'react';
 
 const LoginContext = React.createContext();
 
+/*
+LoginContextProvider provides all vars to perform the login function
+*/
+
 
 function LoginContextProvider({children}) {
     //define useState vars
-
     const [email, setEmail] = useState('');
     const [emailError, setEmailError] = useState('');
     const [password, setPassword] = useState('');

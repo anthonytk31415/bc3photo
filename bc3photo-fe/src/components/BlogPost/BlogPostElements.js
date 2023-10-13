@@ -1,5 +1,5 @@
 import React, { useState, useContext } from 'react';
-import { BlogPost, BlogPostBody, BlogPostBodyElement, ImageSetData} from '../../classes/BlogPost';
+import { BlogPost, BlogPostBodyElement, ImageSetData} from '../../classes/BlogPost';
 
 // import { BlogPostContainer } from './BlogPostContainer';
 
@@ -17,11 +17,8 @@ function BaseElements(props){
 
     const {
         title, handleTitleChange,
-        cover, handleCoverUpload,
+        handleCoverUpload,
     } = useContext(CreateBlogPostContext);
-
-    function submitButton() {
-    }
 
     return (
         <div> 
@@ -53,7 +50,6 @@ function BlogPostAddElementsMenu(props) {
     const {
         showAddElement, toggleShowAddElement, 
         elementType, setElementType, 
-        title, cover, blogPostBody,
         } = useContext(CreateBlogPostContext)
 
     const handleElementChange = (e) => {
@@ -100,7 +96,7 @@ function TextOrHeaderFormElement(props){
 
     const {
         elementType, resetElementAfterSubmit, 
-        blogPostBody, setBlogPostBody
+        setBlogPostBody
     } = useContext(CreateBlogPostContext)
 
     function handleElementSubmit(e) {

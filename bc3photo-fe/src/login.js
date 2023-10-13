@@ -1,5 +1,5 @@
 import React, { useContext } from 'react';
-import { Routes, Route, Link } from 'react-router-dom';
+import { Routes, Route } from 'react-router-dom';
 
 import { SignupPage} from  './signup';
 
@@ -8,7 +8,7 @@ import { CustomFormInput } from './components/AccountSettings/CustomFormInput';
 import { AccountBody } from './components/AccountSettings/AccountBody';
 import { CheckBoxShowPassword } from './components/AccountSettings/CheckBoxShowPassword';
 
-import { LoginContext, LoginContextProvider } from './providers/LoginContextProvider';
+import { LoginContext } from './providers/LoginContextProvider';
 
 function fetchLogin(newLogin) {
     fetch('/login', {
@@ -49,11 +49,10 @@ function fetchLogin(newLogin) {
 function LoginMenu(){
 
     const {
-        signupBool, setSignupBool, 
-        email, setEmail, 
-        emailError, setEmailError, 
-        password, setPassword, 
-        passwordError, setPasswordError,
+        email,  
+        emailError,  
+        password,  
+        passwordError, 
 
         handleEmailChange, handleEmailBlur, handleEmailEntryFocus,
         handlePasswordChange, handlePasswordBlur, handlePasswordEntryFocus,
@@ -124,11 +123,8 @@ function LoginMenu(){
 function LoginPage(){
 
     const {
-        setShowLogin, 
-        setEmail, setPassword,
         setShowSignup, 
         closeLoginWindow, 
-        showPassword, toggleShowPassword
 
         } = useContext(LoginContext);
 

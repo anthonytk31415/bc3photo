@@ -1,5 +1,5 @@
 import React, { useContext } from 'react'
-import { Routes, Route, Link } from 'react-router-dom';
+import { Routes, Route, } from 'react-router-dom';
 import { LoginPage} from  './login';
 import { LoginContext } from "./providers/LoginContextProvider"
 import { CustomFormInput } from './components/AccountSettings/CustomFormInput';
@@ -26,10 +26,10 @@ function fetchSignup(newPost) {
 
 function SignupMenu() {
     const {      
-        email, setEmail,
-        emailError, setEmailError,
-        password, setPassword,
-        passwordError, setPasswordError,
+        email, 
+        emailError, 
+        password,
+        passwordError, 
         passwordConfirm, setPasswordConfirm,
         passwordConfirmError, setPasswordConfirmError,
         
@@ -147,8 +147,6 @@ function SignupMenu() {
 
 function SignupPage() {
     const {
-        setShowSignup,
-        setEmail, setPassword, setPasswordConfirm,
         setShowLogin, 
         closeLoginWindow
         } = useContext(LoginContext);

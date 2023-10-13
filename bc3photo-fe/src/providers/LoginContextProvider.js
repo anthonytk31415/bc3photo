@@ -1,4 +1,4 @@
-import React, {useState, useContext} from 'react';
+import React, {useState } from 'react';
 
 
 const LoginContext = React.createContext();
@@ -25,13 +25,13 @@ function LoginContextProvider({children}) {
       setShowPassword(prevValue => !prevValue);
     }
   
-    function signupClick(e) {
-      setSignupBool(true);
-    }
+    // function signupClick(e) {
+    //   setSignupBool(true);
+    // }
   
-    function loginClick(e) {
-        setSignupBool(false);
-    }
+    // function loginClick(e) {
+    //     setSignupBool(false);
+    // }
   
     function handleEmailChange(e){
         setEmail(e.target.value);
@@ -59,8 +59,11 @@ function LoginContextProvider({children}) {
         }
       }
   
-    function handleEmailBlur(e) {
-        if (e.target.value !== '' && !e.target.value.match(/^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/)) {
+    function handleEmailBlur(e) { 
+        let email = e.target.value; 
+        
+        // if (e.target.value !== '' && !e.target.value.match(/^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/)) {
+        if (email !== '' &&  (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(email)) ){
           setEmailError('Please enter a valid email address');
         }
     }

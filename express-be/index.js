@@ -6,6 +6,8 @@ const express = require('express')
 // mondodb models
 const {BlogPostModel} = require('./models/BlogPostModel');
 const {ImageModel} = require('./models/ImageModel');
+const {UserAuthModel} = require('./models/UserAuthModel');
+
 
 const jwt = require("jsonwebtoken"); 
 const uuid = require('uuid');
@@ -139,21 +141,21 @@ app.post('/blogpost', async function(req, res) {
 // });
 
 
-// function authenticateToken(req, res, next) {
-//     const token = req.header('Authorization')?.split(' ')[1]; // Use optional chaining
+function authenticateToken(req, res, next) {
+    const token = req.header('Authorization')?.split(' ')[1]; // Use optional chaining
 
-//     if (!token) {
-//         return res.status(401).json({ message: 'Unauthorized' });
-//     }
+    if (!token) {
+        return res.status(401).json({ message: 'Unauthorized' });
+    }
 
-//     jwt.verify(token, secretKey, (err, user) => {
-//         if (err) {
-//         return res.status(403).json({ message: 'Token is not valid' });     // verify if this is the right msg to send
-//         }
-//         req.user = user; // Attach user information to the request
-//         next();
-//     });
-// }
+    jwt.verify(token, secretKey, (err, user) => {
+        if (err) {
+        return res.status(403).json({ message: 'Token is not valid' });     // verify if this is the right msg to send
+        }
+        req.user = user; // Attach user information to the request
+        next();
+    });
+}
 
 
 
@@ -247,43 +249,47 @@ app.post('/blogpost', async function(req, res) {
 
 // });
 
-// app.post('/login', async function(req, res, next) {
-//     let {email, password} = req.body;
-//     let existingUser; 
-//     try {
-//         existingUser = await User.findOne({email: email});
+app.post('/login', async function(req, res, next) {
+    let {email, password} = req.body;
+    let existingUser; 
+    try {
+        console.log(email)
+        existingUser = await UserAuthModel.findOne({email: email});
 
-//     } catch {
-//         const error = new Error("Error: (1) Email and/or Password is not found.")
-//         return next(error);
-//     }
-//     if (!existingUser || existingUser.password != password) {
-//         const error = new Error("Error: (2) Email and/or Password is not found.")
-//         return next(error);
-//     }
+        
+    } catch {
+        const error = new Error("Error: (1) Email and/or Password is not found.")
+        return next(error);
+    }
 
-//     let token;
-//     try { 
-//         token = jwt.sign(
-//             { userId: existingUser.id, email: existingUser.email }, 
-//             secretKey, 
-//             { expiresIn: "1hr" }
-//         );
-//     } catch (e) {
-//         const error = new Error("unable to create auth flow.");
-//         return next(error);
-//     }
-//     res
-//         .status(201)
-//         .json({
-//             success: true, 
-//             data: { userID: existingUser.userId, 
-//                     email: existingUser.email, 
-//                     token: token
-//             },
+    console.log('checking...')
+    if (!existingUser || existingUser.password != password) {
+        const error = new Error("Error: (2) Email and/or Password is not found.")
+        return next(error);
+    }
 
-//         });
-// });
+    let token;
+    try { 
+        token = jwt.sign(
+            { user_id: existingUser._id, email: existingUser.email }, 
+            secretKey, 
+            { expiresIn: "1hr" }
+        );
+    } catch (e) {
+        const error = new Error("unable to create auth flow.");
+        return next(error);
+    }
+    res
+        .status(201)
+        .json({
+            success: true, 
+            data: { user_id: existingUser._id, 
+                    email: existingUser.email, 
+                    token: token
+            },
+
+        });
+});
 
 
 

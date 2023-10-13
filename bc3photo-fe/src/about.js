@@ -17,8 +17,18 @@ for (let i = 0; i < aboutBilly.length; i ++ ){
 
 function About() {
     return (
-        <div className='blogPostContainer'>
-            {blurb}
+        <div>
+            
+            <div className="aboutContainer">
+                <div className='blogPostContainer'>
+                    <h1 className="pageTitle"> About </h1>
+                    <div className='aboutTextContainer'>
+                        {blurb}
+                    </div>
+                <img src="/images/BioPic-1200x759.jpg" className='bioImg' alt='bc3'/>
+                    
+                </div>
+            </div>
         </div>
     )
 }

@@ -1,6 +1,5 @@
 import React, {useState} from 'react';
 
-
 // build use context: variable manager!
 const CreateBlogPostContext = React.createContext();
 

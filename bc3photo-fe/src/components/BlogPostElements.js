@@ -27,7 +27,7 @@ function BaseElements(props){
         <div> 
             <p> Create your elements </p>
             <Form className="formInput">
-                <Form.Group className="mb-1" controlId="formMainElements">
+                
                     <Stack direction="horizontal" gap={2}>
                         <label className="formLabel" >Author</label>
                         <Form.Control type="text" value="Billy" required />
@@ -41,7 +41,7 @@ function BaseElements(props){
                         <label className="formLabel">Upload Cover</label>
                         <Form.Control type="file" accept="image/*" onChange={handleCoverUpload}/>
                     </Stack>
-                </Form.Group>
+
             </Form>
         </div>
     )
@@ -196,7 +196,7 @@ function ImageSetElement(props){
     return (
         <div>
             <Form className="formInput" onSubmit={handleImageSetElementSubmit}>
-                <Form.Group className="mb-1" controlId="formMainElements">
+
                     <Stack direction="horizontal" gap={2}>
                         <Form.Label className="formLabel" >Filename</Form.Label>
                         <Form.Control type="text" value={filename} required onChange={handleFilenameInput} />
@@ -210,7 +210,6 @@ function ImageSetElement(props){
                         <Form.Control type="text" value = {caption} required onChange={handleCaptionChange} />
                     </Stack>
                     <Button type="submit" disabled={!caption || !filename}>Add Element</Button>
-                </Form.Group>
 
             </Form>
         </div>

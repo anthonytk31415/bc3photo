@@ -12,17 +12,6 @@ import { CheckBoxShowPassword } from './components/AccountSettings/CheckBoxShowP
 
 import { LoginContext, LoginContextProvider } from './providers/LoginContextProvider';
 
-// currently WIP: 
-// - need to build how to get a token, store the token, and use the token 
-//   - where to store the token? 
-// - also need to build the backend logic - do you build a separate 
-//   router for token authentication for protected data sources and make that
-//   router call for each data-protected path? 
-
-
-// writing login logic here
-// we attempt a login; if it is successful, then we store
-// the jwt token in local storage. 
 function fetchLogin(newLogin) {
     fetch('/login', {
         method: 'POST', 
@@ -39,20 +28,24 @@ function fetchLogin(newLogin) {
 
     })        
     .then(response => {
+        
+        // store token
         const token = response.data.token;
-        localStorage.setItem('token', token)
-        // now potentially redicrect to authenticated route or perform other actions
-        // potentially go to some page afterwards for a redirect. Example below:
-        // window.location.href = '/authenticated-route'; // Replace with your route
+        localStorage.setItem('token', token);
+
+        // store user id
+        const user_id = response.data.user_id;
+        localStorage.setItem('user_id', user_id);
+        console.log('token and user id retrieval successful!');
     })
     .catch((error) => {
         console.error(error);
         alert('Login failed. Please check your credentials.')
     });
-        
-        
 };
 
+
+// add in step to say "login successful!"; try in the backend to verify using userid from the front end
 
 
 function LoginMenu(){
@@ -91,7 +84,6 @@ function LoginMenu(){
             
             <form onSubmit={handleSubmit} className='loginMenu'>
                 <label> 
-
                     <CustomFormInput
                         name="email-input"
                         type="Email"
@@ -103,13 +95,11 @@ function LoginMenu(){
                         pattern = "^[^\s@]+@[^\s@]+\.[^\s@]+$"
                         className = "inputText"
                     />
-                    
                 </label>
+
                 {emailError && <p className="showInputError-text">{emailError}</p>}
-                {/* {!emailError && <div style={{height: '10px'}}></div>} */}
 
                 <label>
-
                     <CustomFormInput
                         name="password-input"
                         type="Password"
@@ -121,24 +111,17 @@ function LoginMenu(){
                         className = "inputText"
                         showPassword = {showPassword}
                     />
-
                 </label>
-                {/* <div style={{height: '12px', backgroundColor: 'transparent'}}/> */}
-                <CheckBoxShowPassword showPassword={showPassword} toggleShowPassword={toggleShowPassword}/>
-                {/* <div style={{height: '10px'}}/> */}
-                {passwordError && <p className="showInputError-text">{passwordError}</p>}
-                {/* {!passwordError && <div style={{height: '10px'}}/>} */}
 
+                <CheckBoxShowPassword showPassword={showPassword} toggleShowPassword={toggleShowPassword}/>
+                {passwordError && <p className="showInputError-text">{passwordError}</p>}
                 <button type='submit' className='formButton'>Continue</button>
+            
             </form> 
             <br></br>
-
         </div>
     )
 }
-
-
-
 
 function LoginPage(){
 

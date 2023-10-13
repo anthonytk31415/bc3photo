@@ -174,9 +174,11 @@ html, body, .app, .router {
 
 .formInput {
   max-width: 100%;
-  background-color: lightgreen;
-
+  background-color: lightgray;
+  border-radius: 10px;
 }
+
+
 
 
 
@@ -561,3 +563,21 @@ html, body, .app, .router {
   opacity: 1;
 }
 
+.bioImg {
+  width: 600px;
+  height: 400px;
+}
+
+
+
+.aboutContainer .blogPostContainer{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.pageTitle {
+  font-size: xx-large;
+
+}

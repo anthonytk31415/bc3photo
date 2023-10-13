@@ -7,8 +7,6 @@ import { AccountTitle } from './components/AccountSettings/AccountTitle';
 import { AccountBody } from './components/AccountSettings/AccountBody';
 import { CheckBoxShowPassword } from './components/AccountSettings/CheckBoxShowPassword';
 
-// todo: 
-// write a path once signup is successful. 
 
 // writing Signup logic here
 function fetchSignup(newPost) {

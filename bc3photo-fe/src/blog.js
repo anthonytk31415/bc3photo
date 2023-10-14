@@ -6,7 +6,7 @@ function Blog() {
     const [blogData, setBlogData] = useState([]);
     useEffect(() => {
         console.log('initiating load.');
-        fetch('/blogdata', {
+        fetch('http://localhost:8080/blogdata', {
             method: 'GET', 
             headers: {
                 "Content-Type": "application/json",

@@ -11,7 +11,7 @@ import { CheckBoxShowPassword } from './components/AccountSettings/CheckBoxShowP
 import { LoginContext } from './providers/LoginContextProvider';
 
 function fetchLogin(newLogin) {
-    fetch('/login', {
+    fetch('http://localhost:8080/login', {
         method: 'POST', 
         headers: {
             "Content-Type": "application/json",

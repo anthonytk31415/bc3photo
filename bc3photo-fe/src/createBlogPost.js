@@ -1,12 +1,47 @@
-import React from 'react';
+import React, {useEffect, useContext} from 'react';
 import { BaseElements,
         BlogPostAddElementsMenu,
         SubmitBlogPostButton  } from './components/BlogPost/BlogPostElements';
 
+import { BlogPostContainer } from './components/BlogPost/BlogPostContainer'
+        
 import { BlogPostProvider } from './providers/BlogPostProvider'
-import  { BlogPostContainer } from './components/BlogPost/BlogPostContainer'
+import { UserLoggedInContext } from './providers/UserLoggedInContextProvider';
+
+
+function verifyToken() {
+    const token = localStorage.getItem('token');
+    console.log('retrieving token...')
+    console.log(token);
+    if (!token) {
+        // token not found and route to 
+        console.log('bad token')
+        return 
+    }
+    fetch('http://localhost:8080/verifyauthentication', { 
+        method: 'GET', 
+        headers: {  
+            Authorization: `Bearer ${token}`,
+        }})
+        .then((response) => {
+            console.log(response)
+            console.log('fetch successful!')
+        }
+        )
+        .catch(error => console.error(error));
+}
+
 
 function CreateBlogPost() {
+
+    const {isAuthenticated, setIsAuthenticated} = useContext(UserLoggedInContext)
+
+    /// flow: verify auth, if true: then render page; if not, redirect to "need to auth"
+    useEffect(() => {
+        console.log('initiating CreateBlogPost page load.');
+        verifyToken();
+    }, []);
+
     return (
         <BlogPostProvider>
             <div className="BlogPostProviderContainer"> 

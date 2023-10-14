@@ -10,7 +10,7 @@ import { CheckBoxShowPassword } from './components/AccountSettings/CheckBoxShowP
 
 // writing Signup logic here
 function fetchSignup(newPost) {
-    fetch('/signup', {
+    fetch('http://localhost:8080/signup', {
         method: 'POST', 
         headers: {
             "Content-Type": "application/json",

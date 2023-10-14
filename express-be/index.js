@@ -2,25 +2,20 @@
 
 // 
 const express = require('express')
+const cors = require('cors'); // Import the cors package
 
-// mondodb models
-const {BlogPostModel} = require('./models/BlogPostModel');
-const {ImageModel} = require('./models/ImageModel');
-const {UserAuthModel} = require('./models/UserAuthModel');
+require('dotenv').config();
 
+const dbPort = process.env.DB_PORT;
 
-const jwt = require("jsonwebtoken"); 
-const uuid = require('uuid');
-// 
-const cookieParser = require('cookie-parser');
-
+// routes exports
+const {authenticateRoutes} = require('./routes/authenticateRoutes');
+const getRoutes = require('./routes/getRoutes')
+const postRoutes = require('./routes/postRoutes')
 
 // Establish Mongoose/MondoDB connection
 const mongoose = require('mongoose');
 const mongoPath = 'mongodb://127.0.0.1:27017/bc3photo'
-
-//later, leverage dotenv for safety
-const secretKey = "secretkeyappearshere";
 
 
 // establish mongoose connection
@@ -34,92 +29,30 @@ mongoose.connect(mongoPath)
 
 // instantiate and import 
 const app = express();
-const path = require('path');
-
-// Increase payload size limit to 50MB
-app.use(express.json({ limit: '50mb' }));
-app.use(express.urlencoded({ limit: '50mb', extended: true }));
 
 const bodyParser = require('body-parser');
 const { decode } = require('punycode');
 
-
+////////////////////////////////
 app.use(bodyParser.json());
-app.use(cookieParser());
+
+app.use(express.json({ limit: '50mb' }));
+app.use(express.urlencoded({ limit: '50mb', extended: true }));
+
+// Allow requests from http://localhost:3000
+app.use(cors({
+    origin: 'http://localhost:3000',
+    methods: 'GET,POST',
+}));
 
 
 ////////////////////////////////
 // route definitions
 ////////////////////////////////
 
-app.use(express.static(path.join(__dirname, 'build')));
-
-function checkHTMLReceived(req, res, next) {
-    res.sendFile(path.join(__dirname, 'build', 'index.html'));
-    // res.cookie('visited', 'true');
-    console.log('sending html...')
-    next();
-}
-
-
-// function checkHTMLReceived(req, res, next) {
-//     console.log('checking for html...');
-//     console.log(req.cookies.visited)
-//     if (!req.cookies.visited) {
-//         res.sendFile(path.join(__dirname, 'build', 'index.html'));
-//         res.cookie('visited', 'true');
-//         console.log('sending html...')
-//     }
-//     next();
-// }
-
-
-// get the initial html 
-
-app.get('/blogdata', async function (req, res) {
-
-    console.log('initiating get /blog route.')
-    try {
-        const data = await BlogPostModel.find();
-        console.log('blah')
-        console.log(data);
-        res.json(data);
-
-    } catch(e){
-    console.error('Error in GET /blogo;', e);
-    res.status(500).json({error: 'Internal Server Error'})
-    }
-});
-
-
-
-
-app.get('/*', checkHTMLReceived, function(req, res){
-    console.log('routing to next middleware...');
-});
-
-// // // post for saving a post// do i want to say /posts/save? for this post request? 
-app.post('/blogpost', async function(req, res) {
-    let postData = req.body;
-    // save the body to the data base
-    // postData = addTimeToPost(postData); 
-    
-    const newPost = new BlogPostModel({
-        authorId: postData.authorId, 
-        title: postData.title, 
-        date: postData.date,
-        blogBody: postData.blogBody, 
-        cover: postData.cover
-    })
-
-    await newPost.save()
-
-    // console.log('heres time updated post data: ', postData);
-    // savePost(postData); 
-    let myResponse = {'response': 'Your post has been successfully saved!'}
-    res.json(myResponse);
-});
-
+app.use('/', authenticateRoutes);
+app.use('/', getRoutes);
+app.use('/', postRoutes);
 
 
 // app.post('/image', async function(req, res) {
@@ -139,24 +72,6 @@ app.post('/blogpost', async function(req, res) {
 //     let myResponse = {'response': 'Your post has been successfully saved!'}
 //     res.json(myResponse);
 // });
-
-
-function authenticateToken(req, res, next) {
-    const token = req.header('Authorization')?.split(' ')[1]; // Use optional chaining
-
-    if (!token) {
-        return res.status(401).json({ message: 'Unauthorized' });
-    }
-
-    jwt.verify(token, secretKey, (err, user) => {
-        if (err) {
-        return res.status(403).json({ message: 'Token is not valid' });     // verify if this is the right msg to send
-        }
-        req.user = user; // Attach user information to the request
-        next();
-    });
-}
-
 
 
 
@@ -249,61 +164,8 @@ function authenticateToken(req, res, next) {
 
 // });
 
-app.post('/login', async function(req, res, next) {
-    let {email, password} = req.body;
-    let existingUser; 
-    try {
-        console.log(email)
-        existingUser = await UserAuthModel.findOne({email: email});
-
-        
-    } catch {
-        const error = new Error("Error: (1) Email and/or Password is not found.")
-        return next(error);
-    }
-
-    console.log('checking...')
-    if (!existingUser || existingUser.password != password) {
-        const error = new Error("Error: (2) Email and/or Password is not found.")
-        return next(error);
-    }
-
-    let token;
-    try { 
-        token = jwt.sign(
-            { user_id: existingUser._id, email: existingUser.email }, 
-            secretKey, 
-            { expiresIn: "1hr" }
-        );
-    } catch (e) {
-        const error = new Error("unable to create auth flow.");
-        return next(error);
-    }
-    res
-        .status(201)
-        .json({
-            success: true, 
-            data: { 
-                    token: token
-            },
-
-        });
-});
-
-
-
-
-
-
-// now lets login and generate a token
-
-
-
-
 
 // establish the BE listener
-let PORT = 8080
-
-app.listen(PORT, function(){
-    console.log(`App running on port = ${PORT}.`)
+app.listen(dbPort, function(){
+    console.log(`App running on port = ${dbPort}.`)
 });

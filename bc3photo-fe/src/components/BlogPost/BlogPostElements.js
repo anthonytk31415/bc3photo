@@ -214,13 +214,25 @@ function ImageSetElement(props){
 }
 
 
+function prepareToken() {
+    const token = localStorage.getItem('token');
+    if (!token) {
+        throw new Error("Token not found.")
+    }
+    return token
+}
+
+
 // write the post to the backend
 function formSubmit(newPost) {
+    const token = prepareToken()
+
     // later write the post requests here.
-    fetch('/blogpost', {
+    fetch('http://localhost:8080/blogpost', {
         method: 'POST', 
         headers: {
             "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
         },
         body: JSON.stringify(newPost)
     })

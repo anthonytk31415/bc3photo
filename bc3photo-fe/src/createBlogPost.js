@@ -8,8 +8,12 @@ import { BlogPostContainer } from './components/BlogPost/BlogPostContainer'
 import { BlogPostProvider } from './providers/BlogPostProvider'
 import { UserLoggedInContext } from './providers/UserLoggedInContextProvider';
 
+// later add to centralized fetch functions?
 
 function verifyToken() {
+
+    /* this can be put in a function 
+    purpose: verify token and retrieve it */
     const token = localStorage.getItem('token');
     console.log('retrieving token...')
     console.log(token);

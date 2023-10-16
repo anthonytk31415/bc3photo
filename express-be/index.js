@@ -1,5 +1,9 @@
 // Server backend file for react project
 
+
+// To do: create images function
+
+
 // 
 const express = require('express')
 const cors = require('cors'); // Import the cors package

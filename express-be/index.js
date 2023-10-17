@@ -58,6 +58,7 @@ app.use('/', authenticateRoutes);
 app.use('/', getRoutes);
 app.use('/', postRoutes);
 
+/// app.use('/imges/, imagesRoutes)
 
 // app.post('/image', async function(req, res) {
 //     let data = req.body;

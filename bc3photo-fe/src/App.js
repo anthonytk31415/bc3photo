@@ -19,7 +19,7 @@ import { UserLoggedInContextProvider } from './providers/UserLoggedInContextProv
 
 function App() {
   return (
-    <BrowserRouter className="router">
+    <BrowserRouter className="router" basename='/'>
       <div className="app">
         <LoginContextProvider>
             <UserLoggedInContextProvider>

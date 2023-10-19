@@ -12,3 +12,7 @@ pathway for when a user is not logged in and a prompt to log in
 
 in the about page: 
 - decrease the Billy image dynamically based on the screen size; 
+
+react routes: 
+- switch from BrowserRouter over to createBrowserRouter
+- fix weird message "can't find routes"

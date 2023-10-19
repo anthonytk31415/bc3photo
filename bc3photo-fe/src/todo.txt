@@ -1,0 +1,14 @@
+
+
+
+
+log out button
+
+images upload mechanism 
+
+
+pathway for when a user is not logged in and a prompt to log in
+- what's that design? 
+
+in the about page: 
+- decrease the Billy image dynamically based on the screen size; 

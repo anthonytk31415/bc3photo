@@ -26,11 +26,11 @@ function App() {
               <Menu/>
               <div className='main'> 
                   <Routes> 
-                    <Route key="/" path="/" element={ <FrontPage/> } />
-                    <Route key="/galleries" path="/galleries" element={ <Galleries/> } />
-                    <Route key="/about" path="/about" element={ <About/> } />
-                    <Route key="/blog" path="/blog" element={ <Blog/> } />
-                    <Route key="/faq" path="/faq" element={ <Faq/> } />
+                    <Route key="front-page" path="/" element={ <FrontPage/> } />
+                    <Route key="galleries" path="/galleries" element={ <Galleries/> } />
+                    <Route key="about" path="/about" element={ <About/> } />
+                    <Route key="blog" path="/blog" element={ <Blog/> } />
+                    <Route key="faq" path="/faq" element={ <Faq/> } />
                     <Route key='login' path='login' element={<LoginPage/>}/> 
                     <Route key="signup" path="signup" element={<SignupPage />} />
                     <Route key="createblogpost" path="createblogpost" element={< CreateBlogPost />} />

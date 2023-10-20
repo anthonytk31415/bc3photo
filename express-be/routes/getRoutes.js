@@ -38,6 +38,7 @@ router.get('/blogdata', async function (req, res) {
         let curBlurb;
 
         for (let i = 0; i < data.length; i++) {
+
             let curBlogBody = data[i].blogBody
             for (let j = 0; j < curBlogBody.length; j ++) {
                 if (curBlogBody[j].type == "text") {
@@ -46,6 +47,7 @@ router.get('/blogdata', async function (req, res) {
                 }
             }
             data[i].blurb = curBlurb; 
+            delete data[i].blogBody;        // remove to save space for response
         }
         // console.log(blurbs)
         // execute the array in parallel

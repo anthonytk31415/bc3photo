@@ -4,7 +4,7 @@
 
 log out button
 
-images upload mechanism 
+images upload mechanism (DONE)
 
 
 pathway for when a user is not logged in and a prompt to log in

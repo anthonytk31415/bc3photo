@@ -19,8 +19,8 @@ async function imageUpload(name, file, user_id) {
         date: getNowDate(), 
         user_id: user_id, 
     })
-    const newImg = await newImage.save()
-    return newImg._id
+    const newImg = await newImage.save();
+    return newImg._id;
 }
 
 // testing the image with a standalone fetch request from the client to upload the image
@@ -46,9 +46,8 @@ router.post('/blogpost', verifyAuth, async function(req, res, next) {
             let cur = postData.blogBody[i]
             if (cur.type == "imageSet") {
                 // if cur == image then do the image stuff; then append
-                let file = cur.data.file;
-                let name = null;                                        // i want to remove this later
-                let image_id = await imageUpload(name, file, user_id)
+
+                let image_id = await imageUpload(cur.data.filename, cur.data.file, user_id)
                 // upload image. then put the id in the data portion; for get requests, we'll then download data
 
                 blogBodyItem = {

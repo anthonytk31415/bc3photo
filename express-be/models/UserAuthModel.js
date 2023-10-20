@@ -11,7 +11,7 @@ const UserAuthSchema = new Schema ({
     collection: 'userAuths'
 });
 
-const UserAuthModel = mongoose.model('userAuth', UserAuthSchema)
+const UserAuthModel = mongoose.model('userAuth', UserAuthSchema);
 
 module.exports =  {
     UserAuthModel,

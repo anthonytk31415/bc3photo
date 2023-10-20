@@ -1,14 +1,16 @@
 import React from "react";
 import Card from 'react-bootstrap/Card';
 
+import { formatDateString } from "../../helperFunctions/dates";
+
 function BlogBlurbBS({blogPost}) {
     return (
         <Card style ={{width: '20rem'}}> 
             <Card.Img variant="top" src={blogPost.cover} />
             <Card.Body >
                 <Card.Title>{blogPost.title}</Card.Title>
-                <Card.Text>What?</Card.Text>
-                <Card.Text>Date Here</Card.Text>
+                <Card.Text>{blogPost.blurb}</Card.Text>
+                <Card.Text>{formatDateString(blogPost.date)}</Card.Text>
             </Card.Body>
         </Card>
     )
@@ -26,6 +28,7 @@ function BlogEntries({blogData}) {
     return (
         <div className='blogPostContainer'>
             {elements}
+            <p>Sample Card Below</p>
             <Card style ={{width: '20rem'}}> 
                 <Card.Img variant="top" src="/images/AntelopeBeampost2-1200x800.jpg" />
                 <Card.Body >

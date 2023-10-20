@@ -2,7 +2,6 @@ const mongoose = require('mongoose')
 const Schema = mongoose.Schema;
 
 const ImageSetSchema = new Schema ({
-    filename: String, 
     caption: String, 
     file: String
 });
@@ -13,11 +12,11 @@ const BlogPostBodyElementSchema = new Schema ({
     data: Schema.Types.Mixed
 });
 
-const ImageSetDataSchema = new Schema ({
-    filename: String, 
-    caption: String, 
-    file: String
-});
+// const ImageSetDataSchema = new Schema ({
+//     filename: String, 
+//     caption: String, 
+//     file: String
+// });
 
 const BlogPostSchema = new Schema ({
     authorId: String, 

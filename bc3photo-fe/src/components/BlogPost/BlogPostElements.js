@@ -26,11 +26,6 @@ function BaseElements(props){
             <Form className="formInput">
                 <Form.Group className="mb-1" controlId="formMainElements">
                     <Stack direction="horizontal" gap={2}>
-                        <label className="formLabel" >Author</label>
-                        <Form.Control type="text" value="Billy" required />
-
-                    </Stack>
-                    <Stack direction="horizontal" gap={2}>
                         <label className="formLabel">Title</label>
                         <Form.Control type="text" value={title} required onChange={handleTitleChange}/>
                     </Stack>
@@ -138,9 +133,9 @@ function TextOrHeaderFormElement(props){
 
 // helper to render imagesets
 function ImageSetElement(props){
-    const [filename, setFilename] = useState('');
-    const [caption, setCaption] = useState('');
 
+
+    const [caption, setCaption] = useState('');
     const [image, setImage] = useState(null);
 
     const {elementType, resetElementAfterSubmit, setBlogPostBody
@@ -148,10 +143,10 @@ function ImageSetElement(props){
 
     function handleImageSetElementSubmit(e) {
         e.preventDefault();
-        let imageSetData = new ImageSetData(filename, caption, image);
+        let imageSetData = new ImageSetData(caption, image);
 
         console.log('image processed')
-        let blogPostBodyElement = new BlogPostBodyElement(elementType, imageSetData)
+        let blogPostBodyElement = new BlogPostBodyElement(elementType, imageSetData, image.name)
         console.log(blogPostBodyElement);
 
         // add logic to submit blog post to the array
@@ -159,16 +154,14 @@ function ImageSetElement(props){
     
         // reset vars 
         resetElementAfterSubmit();
-        setFilename('');
+
         setCaption('');
     }
 
     function handleCaptionChange(e) {
         setCaption(e.target.value)
     }
-    function handleFilenameInput(e) {
-        setFilename(e.target.value)
-    }
+
 
     const handleImageUpload = (e) => {
         const selectedImage = e.target.files[0];
@@ -196,10 +189,7 @@ function ImageSetElement(props){
         <div>
             <Form className="formInput" onSubmit={handleImageSetElementSubmit}>
                 <Form.Group className="mb-1" controlId="formMainElements">
-                    <Stack direction="horizontal" gap={2}>
-                        <Form.Label className="formLabel" >Filename</Form.Label>
-                        <Form.Control type="text" value={filename} required onChange={handleFilenameInput} />
-                    </Stack>
+
                     <Stack direction="horizontal" gap={2}>
                         <Form.Label className="formLabel" >Upload Image</Form.Label>
                         <Form.Control type="file" accept="image/*" required onChange={handleImageUpload} />
@@ -208,7 +198,7 @@ function ImageSetElement(props){
                         <Form.Label className="formLabel" >Caption</Form.Label>
                         <Form.Control type="text" value = {caption} required onChange={handleCaptionChange} />
                     </Stack>
-                    <Button type="submit" disabled={!caption || !filename}>Add Element</Button>
+                    <Button type="submit" disabled={!caption || !image}>Add Element</Button>
                 </Form.Group>
 
             </Form>
@@ -256,8 +246,6 @@ async function formSubmit(newPost) {
 
 // Button to initiate the Post
 function SubmitBlogPostButton(){
-    const author = "Billy"          // can probably remove later
-
     const {
         title, blogPostBody, cover
     } = useContext(CreateBlogPostContext);
@@ -269,6 +257,7 @@ function SubmitBlogPostButton(){
         const now = new Date();
         const timestamp = now.toISOString();
 
+        let author = null;
         let blogPost = new BlogPost(author, title, timestamp, blogPostBody, cover, cover.name); 
         try {
             formSubmit(blogPost)

@@ -39,12 +39,39 @@ router.post('/blogpost', verifyAuth, async function(req, res, next) {
     let cover_id;   // will contain the id of the image
     console.log("(1) current status: ", res.statusCode)
     try { 
+
+        let updateBlogBody = [];
+        for (let i = 0; i < postData.blogBody.length; i ++) {
+            let blogBodyItem; 
+            let cur = postData.blogBody[i]
+            if (cur.type == "imageSet") {
+                // if cur == image then do the image stuff; then append
+                let file = cur.data.file;
+                let name = null;                                        // i want to remove this later
+                let image_id = await imageUpload(name, file, user_id)
+                // upload image. then put the id in the data portion; for get requests, we'll then download data
+
+                blogBodyItem = {
+                    type: cur.type, 
+                    data: image_id, 
+                }
+                
+            } else {
+            // else; not image, so just append
+                blogBodyItem = {
+                    type: cur.type, 
+                    data: cur.data
+                }
+            }
+            updateBlogBody.push(blogBodyItem);
+        }
+
         cover_id = await imageUpload(postData.coverName, postData.cover, user_id);
         const newPost = new BlogPostModel({
             authorId: user_id, 
             title: postData.title, 
             date: getNowDate(),
-            blogBody: postData.blogBody, 
+            blogBody: updateBlogBody, 
             cover: cover_id,
         })
 

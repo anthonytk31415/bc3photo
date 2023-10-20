@@ -7,6 +7,9 @@ function BlogPostBodyContainer() {
     
     const {blogPostBody} = useContext(CreateBlogPostContext);
 
+
+    // based on the blogPostBody items, we'll build arr with 
+    // the rendered react components for display
     let arr = []
     for (let i = 0; i < blogPostBody.length; i ++) {
         let element; 

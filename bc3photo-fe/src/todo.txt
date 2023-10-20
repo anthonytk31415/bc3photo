@@ -20,3 +20,6 @@ react routes:
 
 login: 
 - when logging in; close the window 
+
+createblogpost
+- need to add in "delete" element functionality 

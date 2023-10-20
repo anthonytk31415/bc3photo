@@ -10,13 +10,25 @@ router.get('/blogdata', async function (req, res) {
     console.log('initiating get /blog route.')
     try {
         const data = await BlogPostModel.find();
-        console.log('blah')
-        console.log(data);
-        res.json(data);
+        console.log('data completed; trying to insert real image for each image path')
 
+        // create the array of promises to grab all the blogposts in parallel
+        const promises = data.map( async (x) => {
+            let cur = await getImage(x.cover);
+            return cur
+        })
+
+        // execute the array in parallel
+        Promise.all(promises)
+            .then((results) => {
+                for (let i = 0; i < data.length; i++) {
+                    data[i].cover = results[i];
+                }
+                res.json(data);
+            });
     } catch(e){
-    console.error('Error in GET /blogdata;', e);
-    res.status(500).json({error: 'Internal Server Error'})
+        console.error('Error in GET /blogdata;', e);
+        res.status(500).json({error: 'Internal Server Error'})
     }
 });
 
@@ -33,6 +45,7 @@ async function getImage(image_id) {
     }
 }
 
+// test to get an image basedon the image id encoded as a string
 // this works!
 router.get('/image', async function (req, res) {
     // let image_id = req.body.imagePath; 

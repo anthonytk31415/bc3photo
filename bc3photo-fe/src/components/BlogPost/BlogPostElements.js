@@ -91,6 +91,9 @@ function BlogPostAddElementsMenu(props) {
 // helper to render text or headers
 ////////////////////////////////////////////////
 
+
+// create the functional component for the form to add blogpostElements
+// and then when you submit, it'll add to the blogpostElements final array 
 function TextOrHeaderFormElement(props){
     const [textInput, setTextInput] = useState('');
 

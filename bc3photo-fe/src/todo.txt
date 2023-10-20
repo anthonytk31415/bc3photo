@@ -16,3 +16,7 @@ in the about page:
 react routes: 
 - switch from BrowserRouter over to createBrowserRouter
 - fix weird message "can't find routes"
+
+
+login: 
+- when logging in; close the window 

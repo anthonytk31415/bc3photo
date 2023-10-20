@@ -1,12 +1,13 @@
 
 /// we'll use this to submit to the backend
 class BlogPost {
-    constructor(authorId, title, date, blogBody, cover) {
+    constructor(authorId, title, date, blogBody, cover, coverName) {
         this.authorId = authorId
         this.title = title 
         this.date = date
         this.blogBody = blogBody
         this.cover = cover
+        this.coverName = coverName
     }
 
 }

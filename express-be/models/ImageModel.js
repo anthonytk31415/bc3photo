@@ -3,9 +3,10 @@ const Schema = mongoose.Schema;
 
 
 const ImageSchema = new Schema ({
-    filename: String, 
+    name: String, 
     file: String, 
     date: Date,
+    user_id: mongoose.Schema.Types.ObjectId, 
 }, {
     collection: 'images'
 });

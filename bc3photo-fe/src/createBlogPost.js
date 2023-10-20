@@ -14,36 +14,36 @@ function verifyToken() {
 
     return new Promise((resolve, reject) => {
 
-    /* this can be put in a function 
-    purpose: verify token and retrieve it */
-    const token = localStorage.getItem('token');
-    console.log('retrieving token...')
-    console.log(token);
-    if (!token) {
-        // token not found and route to 
-        console.log('bad token');
-        resolve(false);
-    }
-    fetch('http://localhost:8080/verifyauthentication', { 
-        method: 'GET', 
-        headers: {  
-            Authorization: `Bearer ${token}`,
-        }})
-        .then((response) => {
-            console.log(response)
-            if (response.ok ) {
-                console.log('fetch successful! and token is valid');
-                resolve(true);
-            } else {
-                console.log('token delivered but login unsuccessful');
-                resolve(false);
-            }
+        /* this can be put in a function 
+        purpose: verify token and retrieve it */
+        const token = localStorage.getItem('token');
+        console.log('retrieving token...')
+        console.log(token);
+        if (!token) {
+            // token not found and route to 
+            console.log('bad token');
+            resolve(false);
         }
-        )
-        .catch(error => {
-            console.error(error);
-            reject(error);
-        });
+        fetch('http://localhost:8080/verifyauthentication', { 
+            method: 'GET', 
+            headers: {  
+                Authorization: `Bearer ${token}`,
+            }})
+            .then((response) => {
+                console.log(response)
+                if (response.ok ) {
+                    console.log('fetch successful! and token is valid');
+                    resolve(true);
+                } else {
+                    console.log('token delivered but login unsuccessful');
+                    resolve(false);
+                }
+            }
+            )
+            .catch(error => {
+                console.error(error);
+                reject(error);
+            });
 });
 }
 

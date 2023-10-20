@@ -224,42 +224,64 @@ function prepareToken() {
 
 
 // write the post to the backend
-function formSubmit(newPost) {
+async function formSubmit(newPost) {
     const token = prepareToken()
 
     // later write the post requests here.
-    fetch('http://localhost:8080/blogpost', {
-        method: 'POST', 
-        headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${token}`,
-        },
-        body: JSON.stringify(newPost)
-    })
-        .then((response) => {
-            response.json()
-            console.log('transfer complete')
+    try {
+        fetch('http://localhost:8080/blogpost', {
+            method: 'POST', 
+            headers: {
+                "Content-Type": "application/json",
+                Authorization: `Bearer ${token}`,
+            },
+            body: JSON.stringify(newPost)
         })
-        .catch((error) => console.error(error));
+        .then(response => {
+            console.log('transfer complete');
+            console.log(response);                  
+        })
+        .catch(() => {
+            console.error("error triggered during fetch request")
+        })
+    } catch(error) {
+        console.error("post error occurred.")
+        console.error(error)
+    }
+
 };
 
 // Button to initiate the Post
 function SubmitBlogPostButton(){
-    const author = "Billy"
+    const author = "Billy"          // can probably remove later
+
     const {
         title, blogPostBody, cover
     } = useContext(CreateBlogPostContext);
 
-    function handleSubmit(e) {
+    async function handleSubmit(e) {
         e.preventDefault();
         console.log('preparing submission')
         
         const now = new Date();
         const timestamp = now.toISOString();
 
-        let blogPost = new BlogPost(author, title, timestamp, blogPostBody, cover); 
-        formSubmit(blogPost);
-        console.log(blogPost);
+        let blogPost = new BlogPost(author, title, timestamp, blogPostBody, cover, cover.name); 
+        try {
+            formSubmit(blogPost)
+                .then(data => {
+                    console.log(blogPost);
+                    console.log("success?")
+                    console.log(data)
+                })
+                .catch(e => {
+                    console.error("failed formSubmit for some reason")
+                    console.error(e)
+                })
+        } catch (e) {
+            const error = new Error("what happened here")
+            console.error(error)
+        }
     }
 
     return (

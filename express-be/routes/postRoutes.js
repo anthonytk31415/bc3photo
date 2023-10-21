@@ -46,7 +46,7 @@ router.post('/blogpost', verifyAuth, async function(req, res, next) {
             let cur = postData.blogBody[i]
             if (cur.type == "imageSet") {
                 // if cur == image then do the image stuff; then append
-
+                console.log('this is the caption: ', cur.data.caption, 'name: ', cur.data.name)
                 let image_id = await imageUpload(cur.data.name, cur.data.file, user_id)
                 // upload image. then put the id in the data portion; for get requests, we'll then download data
 

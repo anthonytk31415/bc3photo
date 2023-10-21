@@ -18,7 +18,6 @@ router.get('/blogdata', async function (req, res) {
         data = JSON.parse(JSON.stringify(data));
 
         const promises = data.map( async (x) => {
-            console.log(x, "promise-x")
             let cur = await getImage(x.cover);
             return cur
         })
@@ -68,33 +67,42 @@ router.get('/blogdata', async function (req, res) {
 
 router.get('/blog/:blog_id', async function (req, res) {
     const blog_id = req.params.blog_id; 
+    
     try {
-        const data = await BlogPostModel.findOne(
+        let data = await BlogPostModel.findOne(
             { _id: new mongoose.Types.ObjectId(blog_id)}
         );
+        data = JSON.parse(JSON.stringify(data));
+
         // now handle the images
         let newCover = await getImage(data.cover)
         data.cover = newCover
 
-        for (let i = 0; i < data.blogBody; i ++) {
+        // iterate over blogBody = [element0, element2, ...]
+        for (let i = 0; i < data.blogBody.length; i ++) {
             let element = data.blogBody[i];
-            if (element.type == "imageSet") {
-                const curImage = await getImage(element.data)
-                element.data = curImage
+            if (element.type == 'imageSet') {
+                console.log(element.data.image_id)
+                const curImage = await getImage(element.data.image_id)
+
+            // need to adjust HERE
+                const newData = {
+                    caption: element.data.caption,
+                    file: curImage,
                 }
-        } 
-        
+                element.data = newData;
+            }
+        }
+
         return res.json(data);
-
-        
-
-
     } catch (e) {
         console.log(e);
     }
     
 }); 
 
+
+// when you get a specific user_id you need to also fetch the images and ensure transformation. 
 // integrate getting user name and then dual promise chainig for get/blogdata
 // async function getName(user_id) {
 //     try {
@@ -135,8 +143,5 @@ router.get('/image', async function (req, res) {
     res.status(500).json({error: 'Internal Server Error'})
     }
 });
-
-
-
 
 module.exports = router;

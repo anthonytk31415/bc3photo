@@ -1,11 +1,10 @@
 const mongoose = require('mongoose') 
 const Schema = mongoose.Schema;
 
-const ImageSetSchema = new Schema ({
-    caption: String, 
-    file: String, 
-    name: String
-});
+
+
+
+
 
 // data either contains:
 // imageset, or text for non image sets 
@@ -15,18 +14,13 @@ const BlogPostBodyElementSchema = new Schema ({
 });
 
 
-const ImageSetDataSchema = new Schema ({
-    filename: String, 
-    caption: String, 
-    file: String
-});
 
 const BlogPostSchema = new Schema ({
-    authorId: String, 
+    authorId: mongoose.Schema.Types.ObjectId, 
     title: String, 
     date: Date,  
     blogBody: [BlogPostBodyElementSchema], 
-    cover: String
+    cover: String, 
 
 }, {
     collection: 'blogposts'

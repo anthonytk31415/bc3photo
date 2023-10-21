@@ -143,7 +143,8 @@ function ImageSetElement(props){
 
     function handleImageSetElementSubmit(e) {
         e.preventDefault();
-        let imageSetData = new ImageSetData(caption, image, image.name);
+        
+        let imageSetData = new ImageSetData(caption, image);
         let blogPostBodyElement = new BlogPostBodyElement(elementType, imageSetData)
         console.log(blogPostBodyElement);
 

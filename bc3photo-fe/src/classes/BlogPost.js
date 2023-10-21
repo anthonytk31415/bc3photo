@@ -53,10 +53,9 @@ class BlogPostBodyElement {
 
 // this is the "data" that's use din the BlogPostBodyElement for type = ImageSet
 class ImageSetData {
-    constructor(caption, file=null, filename) {
+    constructor(caption, file=null, name) {
         this.caption = caption
         this.file = file
-        this.filename = filename
     }
 }
 

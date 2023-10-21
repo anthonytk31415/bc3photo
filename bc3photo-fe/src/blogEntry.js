@@ -24,14 +24,16 @@ function BlogEntry() {
                 return response.json();
             })
             .then(data => {
+                console.log(data)
                 setTitle(data.title)
                 setCover(data.cover)
                 setBlogPostBody(data.blogBody)
                 setBlogDate(data.date)
+
             })
             .catch(error => console.error(error));
 
-    }, );
+    }, []);
 
     return (
         <div> 

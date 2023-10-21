@@ -22,7 +22,6 @@ function BlogPostProvider({children}) {
 
     function handleCoverUpload(e) {
         const selectedImage = e.target.files[0];
-    
         if (selectedImage) {        
         const reader = new FileReader();
 

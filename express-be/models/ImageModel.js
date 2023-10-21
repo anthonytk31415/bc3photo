@@ -3,7 +3,6 @@ const Schema = mongoose.Schema;
 
 
 const ImageSchema = new Schema ({
-    name: String, 
     file: String, 
     date: Date,
     user_id: mongoose.Schema.Types.ObjectId, 

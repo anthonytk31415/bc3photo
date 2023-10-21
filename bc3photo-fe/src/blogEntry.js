@@ -12,9 +12,6 @@ function BlogEntry() {
 
     let {blog_id}  = useParams();
 
-    // (1) fetch request to grab data based on the blog id
-    // (2) will need to get the blog id on the backend to make it a link
-    // (3) write the BE the path
     useEffect( () => {
         fetch(`http://localhost:8080/blog/${blog_id}`, {
             method: 'GET', 
@@ -24,7 +21,6 @@ function BlogEntry() {
                 return response.json();
             })
             .then(data => {
-                console.log(data)
                 setTitle(data.title)
                 setCover(data.cover)
                 setBlogPostBody(data.blogBody)

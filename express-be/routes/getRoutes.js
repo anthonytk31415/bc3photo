@@ -10,32 +10,32 @@ router.get('/blogdata', async function (req, res) {
 
     console.log('initiating get /blog route.')
     try {
-        let data = await BlogPostModel.find({}, 'date title cover blogBody');
+        let data = await BlogPostModel.find({}, 'date title cover blogBody _id');
         console.log('data completed; trying to insert real image for each image path')
 
-        // create the array of promises to grab all the blogposts in parallel
-
+        // create json on data for mutability; Mongoose output is not mutable
         data = JSON.parse(JSON.stringify(data));
 
+        // create the array of promises to grab all the blogposts in parallel
         const promises = data.map( async (x) => {
             let cur = await getImage(x.cover);
             return cur
         })
 
-        const blurbs = data.map( (x) => {
-            let res; 
-            for (let i = 0; i < x.blogBody.length; i ++) {
-                let cur = x.blogBody[i]
-                if (cur.type == "text") {
-                    res = cur.data.slice(0,20);
-                    break;  
-                }
-            }
-            return res
-        })
+        // const blurbs = data.map( (x) => {
+        //     let res; 
+        //     for (let i = 0; i < x.blogBody.length; i ++) {
+        //         let cur = x.blogBody[i]
+        //         if (cur.type == "text") {
+        //             res = cur.data.slice(0,20);
+        //             break;  
+        //         }
+        //     }
+        //     return res
+        // })
 
+        // iterate through blogbody to find first text element to truncate for blurb 
         let curBlurb;
-
         for (let i = 0; i < data.length; i++) {
 
             let curBlogBody = data[i].blogBody
@@ -48,7 +48,7 @@ router.get('/blogdata', async function (req, res) {
             data[i].blurb = curBlurb; 
             delete data[i].blogBody;        // remove to save space for response
         }
-        // console.log(blurbs)
+
         // execute the array in parallel
         Promise.all(promises)
             .then((results) => {
@@ -67,7 +67,6 @@ router.get('/blogdata', async function (req, res) {
 
 router.get('/blog/:blog_id', async function (req, res) {
     const blog_id = req.params.blog_id; 
-    
     try {
         let data = await BlogPostModel.findOne(
             { _id: new mongoose.Types.ObjectId(blog_id)}
@@ -85,7 +84,6 @@ router.get('/blog/:blog_id', async function (req, res) {
                 console.log(element.data.image_id)
                 const curImage = await getImage(element.data.image_id)
 
-            // need to adjust HERE
                 const newData = {
                     caption: element.data.caption,
                     file: curImage,
@@ -93,12 +91,11 @@ router.get('/blog/:blog_id', async function (req, res) {
                 element.data = newData;
             }
         }
-
         return res.json(data);
+
     } catch (e) {
         console.log(e);
     }
-    
 }); 
 
 

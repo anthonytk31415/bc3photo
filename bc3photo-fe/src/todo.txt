@@ -23,5 +23,16 @@ login:
 
 createblogpost
 - need to add in "delete" element functionality 
+- add in path for successful submission
 
-clean up console logs for tidiness
+clean up console logs for tidiness - why does the console think i have no path? 
+
+
+Frontend NOTES: 
+fetch requests happen: 
+- blog (get)
+- createblogpost (post)
+- blogEntry (get)
+
+
+after 

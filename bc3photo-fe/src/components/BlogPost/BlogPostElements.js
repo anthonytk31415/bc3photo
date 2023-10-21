@@ -7,13 +7,13 @@ import Form from 'react-bootstrap/Form';
 import Stack from 'react-bootstrap/Stack';
 import Button from 'react-bootstrap/Button';
 
-import { CreateBlogPostContext } from '../../providers/BlogPostProvider';
+import { CreateBlogPostContext } from '../../providers/CreateBlogPostProvider';
 
 ////////////////////////////////////////////////
 // build macros elements holder
 ////////////////////////////////////////////////
 
-function BaseElements(props){
+function BaseElements(){
 
     const {
         title, handleTitleChange,

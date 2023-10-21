@@ -18,6 +18,9 @@ react routes:
 - fix weird message "can't find routes"
 
 
+- add user info 
+- map author of blogs to blog entry
+
 login: 
 - when logging in; close the window 
 
@@ -35,4 +38,3 @@ fetch requests happen:
 - blogEntry (get)
 
 
-after 

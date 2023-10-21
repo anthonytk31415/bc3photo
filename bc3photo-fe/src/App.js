@@ -13,6 +13,7 @@ import { Blog } from './blog';
 import {LoginPage} from './login';
 import {SignupPage} from './signup';
 import { CreateBlogPost } from './createBlogPost'
+import { CreateGalleryPhoto } from './createGalleryPhoto';
 
 import { LoginContextProvider } from './providers/LoginContextProvider';
 import { UserLoggedInContextProvider } from './providers/UserLoggedInContextProvider';
@@ -34,9 +35,15 @@ function App() {
                     <Route key="blog" path="/blog" element={<Blog/>} />
                     <Route key="blog-entry" path="/blog/:blog_id" element={<BlogEntry />}/>
                     <Route key="faq" path="/faq" element={ <Faq/> } />
-                    <Route key='login' path='login' element={<LoginPage/>}/> 
-                    <Route key="signup" path="signup" element={<SignupPage />} />
-                    <Route key="createblogpost" path="createblogpost" element={< CreateBlogPost />} />
+                    <Route key='login' path='/login' element={<LoginPage/>}/> 
+                    <Route key="signup" path="/signup" element={<SignupPage />} />
+                    
+
+                    <Route key="createblogpost" path="/createblogpost" element={< CreateBlogPost />} />
+
+                    <Route key="creategalleryphoto" path="/creategalleryphoto" element={< CreateGalleryPhoto />} />
+
+
                   </Routes> 
               </div>
               <BottomRibbon/> 

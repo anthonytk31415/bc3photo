@@ -4,7 +4,8 @@ import { Routes, Route, Link } from 'react-router-dom';
 import { LoginPage} from  '../../login';
 import { SignupPage} from  '../../signup';
 import { LoginContext } from "../../providers/LoginContextProvider"
-import { CreateBlogPost } from '../../createBlogPost';
+// import { CreateBlogPost } from '../../createBlogPost';
+// import { CreateGallaryPhoto } from '../../createGallaryPhoto';
 
 function AccountSettingsIcon() {
 
@@ -33,10 +34,11 @@ function AccountSettingsIcon() {
         }
     }
 
-    function toggleBlogPost(e) {
+    function toggleCloseSettings(e) {
         // close the account-settings menu
         setShowAccountSettings(false);
     }
+
 
     useEffect(() =>  {
         const handleClickOutside = (e) => {
@@ -73,8 +75,11 @@ function AccountSettingsIcon() {
                                 </div>
                                 <div> 
                                     <p className="boxLinkText">  Admin Stuff </p> 
-                                    <Link className={'boxTextContainer'} to="/createblogpost" onClick={toggleBlogPost} > 
+                                    <Link className={'boxTextContainer'} to="/createblogpost" onClick={toggleCloseSettings} > 
                                         <p className="boxLinkText">Create Blog Post</p>
+                                    </Link>
+                                    <Link className={'boxTextContainer'} to="/creategalleryphoto" onClick={toggleCloseSettings} > 
+                                        <p className="boxLinkText">Create Gallery Photo</p>
                                     </Link>
                                 </div>
                             </div>
@@ -100,7 +105,6 @@ function AccountSettingsIcon() {
                 <Routes>
                     <Route key='login' path='/login' element={<LoginPage/>}/> 
                     <Route key='signup' path='/signup' element={<SignupPage/>}/> 
-                    <Route key='createblogpost' path='/signup' createblogpost={<CreateBlogPost/>}/> 
                 </Routes>
             
             </div>

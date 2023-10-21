@@ -3,7 +3,7 @@ import React, {useState} from 'react';
 // build use context: variable manager!
 const CreateBlogPostContext = React.createContext();
 
-function BlogPostProvider({children}) {
+function CreateBlogPostProvider({children}) {
 
     const [blogPostBody, setBlogPostBody] = useState([]);
     const [title, setTitle] = useState('');
@@ -62,4 +62,4 @@ function BlogPostProvider({children}) {
 }
 
 
-export {BlogPostProvider, CreateBlogPostContext};
+export {CreateBlogPostProvider, CreateBlogPostContext};

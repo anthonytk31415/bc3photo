@@ -23,3 +23,5 @@ login:
 
 createblogpost
 - need to add in "delete" element functionality 
+
+clean up console logs for tidiness

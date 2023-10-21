@@ -3,20 +3,23 @@ const Schema = mongoose.Schema;
 
 const ImageSetSchema = new Schema ({
     caption: String, 
-    file: String
+    file: String, 
+    name: String
 });
 
-
+// data either contains:
+// imageset, or text for non image sets 
 const BlogPostBodyElementSchema = new Schema ({
     type: String, 
     data: Schema.Types.Mixed
 });
 
-// const ImageSetDataSchema = new Schema ({
-//     filename: String, 
-//     caption: String, 
-//     file: String
-// });
+
+const ImageSetDataSchema = new Schema ({
+    filename: String, 
+    caption: String, 
+    file: String
+});
 
 const BlogPostSchema = new Schema ({
     authorId: String, 

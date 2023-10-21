@@ -131,9 +131,9 @@ function TextOrHeaderFormElement(props){
     )
 }
 
-// helper to render imagesets
+// helper to render imagesets; this is the child element of the BlogBody
+// note ImageSets require caption; image; in the image itself you can get the name
 function ImageSetElement(props){
-
 
     const [caption, setCaption] = useState('');
     const [image, setImage] = useState(null);
@@ -143,10 +143,8 @@ function ImageSetElement(props){
 
     function handleImageSetElementSubmit(e) {
         e.preventDefault();
-        let imageSetData = new ImageSetData(caption, image);
-
-        console.log('image processed')
-        let blogPostBodyElement = new BlogPostBodyElement(elementType, imageSetData, image.name)
+        let imageSetData = new ImageSetData(caption, image, image.name);
+        let blogPostBodyElement = new BlogPostBodyElement(elementType, imageSetData)
         console.log(blogPostBodyElement);
 
         // add logic to submit blog post to the array
@@ -154,7 +152,6 @@ function ImageSetElement(props){
     
         // reset vars 
         resetElementAfterSubmit();
-
         setCaption('');
     }
 
@@ -162,14 +159,11 @@ function ImageSetElement(props){
         setCaption(e.target.value)
     }
 
-
     const handleImageUpload = (e) => {
         const selectedImage = e.target.files[0];
     
-        // Check if an image was selected
         if (selectedImage) {
-        // You can set a maximum file size here if needed
-        // For example, to limit to 5MB: if (selectedImage.size <= 5 * 1024 * 1024) { ... }
+        // set maxfile if req'd; if (selectedImage.size <= 5 * 1024 * 1024) { ... }
         
         const reader = new FileReader();
 
@@ -183,7 +177,6 @@ function ImageSetElement(props){
         reader.readAsDataURL(selectedImage);
         }
     };
-
 
     return (
         <div>
@@ -216,7 +209,7 @@ function prepareToken() {
 }
 
 
-// write the post to the backend
+// write the post to the /Blogpost path
 async function formSubmit(newPost) {
     const token = prepareToken()
 
@@ -244,7 +237,11 @@ async function formSubmit(newPost) {
 
 };
 
+
+
 // Button to initiate the Post
+// Flow: Take vars from Context, build the BlogPost; submit it to the BE
+
 function SubmitBlogPostButton(){
     const {
         title, blogPostBody, cover
@@ -253,26 +250,19 @@ function SubmitBlogPostButton(){
     async function handleSubmit(e) {
         e.preventDefault();
         console.log('preparing submission')
-        
-        const now = new Date();
-        const timestamp = now.toISOString();
 
-        let author = null;
-        let blogPost = new BlogPost(author, title, timestamp, blogPostBody, cover, cover.name); 
+        let blogPost = new BlogPost(null, title, new Date().toISOString(), blogPostBody, cover, cover.name); 
         try {
             formSubmit(blogPost)
                 .then(data => {
-                    console.log(blogPost);
-                    console.log("success?")
-                    console.log(data)
+                    console.log("Submission completed.")
                 })
                 .catch(e => {
                     console.error("failed formSubmit for some reason")
                     console.error(e)
                 })
         } catch (e) {
-            const error = new Error("what happened here")
-            console.error(error)
+            console.error(e)
         }
     }
 

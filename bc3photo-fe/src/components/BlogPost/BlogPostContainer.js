@@ -3,11 +3,8 @@ import {CreateBlogPostContext} from '../../providers/BlogPostProvider';
 
 
 
-function BlogPostBodyContainer() {
+function BlogPostBodyContainer({blogPostBody}) {
     
-    const {blogPostBody} = useContext(CreateBlogPostContext);
-
-
     // based on the blogPostBody items, we'll build arr with 
     // the rendered react components for display
     let arr = []
@@ -52,8 +49,8 @@ function BlogPostBodyContainer() {
 // BlogPostContainer will be rendered for the preview and 
 // for the blog post. 
 
-function BlogPostContainer() {
-    const {title, cover} =useContext(CreateBlogPostContext);
+function BlogPostContainer({title, cover, blogPostBody}) {
+
     return (
         <div className="blogPostContainer"> 
             <h1 className="blogTitle"> {title}</h1>
@@ -66,9 +63,19 @@ function BlogPostContainer() {
             <div className="imgBlogContainer"> 
             {cover && <img src={cover} alt="cover-placeholder" className="imgBlog"/>}
             </div>
-            <BlogPostBodyContainer />
+            <BlogPostBodyContainer blogPostBody={blogPostBody}/>
         </div>
     )
 }
 
-export {BlogPostContainer}
+
+function BlogPostPreviewContainer() {
+    const {title, cover, blogPostBody} =useContext(CreateBlogPostContext);
+
+    return (
+        <BlogPostContainer title={title} cover ={cover} blogPostBody={blogPostBody}/>
+    )
+}
+
+
+export {BlogPostContainer, BlogPostPreviewContainer}

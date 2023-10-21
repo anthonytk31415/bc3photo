@@ -66,7 +66,34 @@ router.get('/blogdata', async function (req, res) {
 
 
 
+router.get('/blog/:blog_id', async function (req, res) {
+    const blog_id = req.params.blog_id; 
+    try {
+        const data = await BlogPostModel.findOne(
+            { _id: new mongoose.Types.ObjectId(blog_id)}
+        );
+        // now handle the images
+        let newCover = await getImage(data.cover)
+        data.cover = newCover
 
+        for (let i = 0; i < data.blogBody; i ++) {
+            let element = data.blogBody[i];
+            if (element.type == "imageSet") {
+                const curImage = await getImage(element.data)
+                element.data = curImage
+                }
+        } 
+        
+        return res.json(data);
+
+        
+
+
+    } catch (e) {
+        console.log(e);
+    }
+    
+}); 
 
 // integrate getting user name and then dual promise chainig for get/blogdata
 // async function getName(user_id) {

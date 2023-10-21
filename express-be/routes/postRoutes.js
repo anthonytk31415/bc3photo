@@ -47,16 +47,20 @@ router.post('/blogpost', verifyAuth, async function(req, res, next) {
             if (cur.type == "imageSet") {
                 // if cur == image then do the image stuff; then append
 
-                let image_id = await imageUpload(cur.data.filename, cur.data.file, user_id)
+                let image_id = await imageUpload(cur.data.name, cur.data.file, user_id)
                 // upload image. then put the id in the data portion; for get requests, we'll then download data
 
                 blogBodyItem = {
                     type: cur.type, 
-                    data: image_id, 
+                    data: {
+                        caption: cur.data.caption, 
+                        name: cur.data.name,
+                        image_id: image_id, 
+                    }
                 }
                 
             } else {
-            // else; not image, so just append
+            // else; not image, so just append; data = string
                 blogBodyItem = {
                     type: cur.type, 
                     data: cur.data

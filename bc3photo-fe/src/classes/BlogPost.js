@@ -52,7 +52,6 @@ class BlogPostBodyElement {
 
 
 // this is the "data" that's use din the BlogPostBodyElement for type = ImageSet
-// remove "filename; this is redundant; make it fully defined by the file itself"
 class ImageSetData {
     constructor(caption, file=null, filename) {
         this.caption = caption

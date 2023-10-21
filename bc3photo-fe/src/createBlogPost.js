@@ -3,13 +3,18 @@ import { BaseElements,
         BlogPostAddElementsMenu,
         SubmitBlogPostButton  } from './components/BlogPost/BlogPostElements';
 
-import { BlogPostContainer } from './components/BlogPost/BlogPostContainer'
+import { BlogPostPreviewContainer } from './components/BlogPost/BlogPostContainer'
         
 import { BlogPostProvider } from './providers/BlogPostProvider'
 import { UserLoggedInContext } from './providers/UserLoggedInContextProvider';
 
 // later add to centralized fetch functions?
 
+
+
+// when you do verifyToken, do you actually have to do 
+// 2 separate calls? can't you just provide the fetch request 
+// with the token itself and handle the logic from the backend?  
 function verifyToken() {
 
     return new Promise((resolve, reject) => {
@@ -74,7 +79,7 @@ function CreateBlogPost() {
 
                 </div> 
                 <p> preview your content: (PLACEHOLDER) </p> 
-                <BlogPostContainer />
+                <BlogPostPreviewContainer />
             </BlogPostProvider>
         )}
         </div>

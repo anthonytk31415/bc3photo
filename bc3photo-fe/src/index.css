@@ -595,3 +595,12 @@ html, body, .app, .router {
 .BlogBlurbBS {
   text-decoration: none;
 }
+
+
+
+input.numberInput[type="number"]::-webkit-inner-spin-button,
+input.numberInput[type="number"]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  appearance: none;
+  margin: 0; /* Optional, to adjust the space where the spinners used to be */
+}

@@ -18,7 +18,7 @@ function CreateGalleryPhoto() {
 
     /// flow: verify auth, if true: then render page; if not, redirect to "need to auth"
     useEffect(() => {
-        console.log('initiating Create Gallary Photo page load.');
+        console.log('initiating CreateGalleryPhoto page load.');
             handleVerification(setIsAuthenticated)
     });
 
@@ -27,7 +27,7 @@ function CreateGalleryPhoto() {
             <CreateGalleryPhotoProvider>
             {isAuthenticated && (
                 <div>
-                    <p> PLACEHOLDER: Create Gallary Photo</p> 
+                    <p> Create Gallery Photo</p> 
                     <GalleryPhotoCreateMenu/>
                 </div> 
 

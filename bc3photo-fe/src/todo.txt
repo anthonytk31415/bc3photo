@@ -21,6 +21,9 @@ react routes:
 - add user info 
 - map author of blogs to blog entry
 
+Blog: 
+- share on social media
+
 login: 
 - when logging in; close the window 
 
@@ -38,3 +41,6 @@ fetch requests happen:
 - blogEntry (get)
 
 
+
+
+verify isAdmin for admin features

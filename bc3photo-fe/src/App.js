@@ -40,7 +40,6 @@ function App() {
                     
 
                     <Route key="createblogpost" path="/createblogpost" element={< CreateBlogPost />} />
-
                     <Route key="creategalleryphoto" path="/creategalleryphoto" element={< CreateGalleryPhoto />} />
 
 

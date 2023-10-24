@@ -38,5 +38,4 @@ function CreateGalleryPhoto() {
 }
 
 
-
 export { CreateGalleryPhoto }

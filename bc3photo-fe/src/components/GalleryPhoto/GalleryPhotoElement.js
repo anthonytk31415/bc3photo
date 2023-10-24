@@ -38,7 +38,7 @@
 
 import React from "react";
 
-function GalleryPhoto({name, image, blurb, subImage1, subImage2, country, prices, productDims, isArialPhoto}) {
+function GalleryPhotoElement({name, image, blurb, subImage1, subImage2, country, prices, productDims, isArialPhoto}) {
     const sizes = ['small', 'medium', 'large']
     let basePricesElements = []
     let framedPricesElements = []
@@ -91,4 +91,4 @@ function GalleryPhoto({name, image, blurb, subImage1, subImage2, country, prices
 }
 
 
-export { GalleryPhoto }
+export { GalleryPhotoElement }

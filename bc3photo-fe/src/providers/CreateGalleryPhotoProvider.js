@@ -3,13 +3,18 @@ import React, {useState} from 'react';
 // build use context: variable manager!
 const CreateGalleryPhotoContext = React.createContext();
 
+// small: `Print size: 10″ x 18″ ; Paper size: 14″ x 22″ ; Framed size 16″ x 24″`, 
+// medium: `Print size: 16.5″ x 30″ ; Paper size: 20.5″ x 34″ ; Framed size 22.5″ x 36″`, 
+// large: `Print size: 22.5″ x 40″ ; Paper size: 28.5″ x 46″ ; Framed size 30.5″ x 48″`,
+
+
+// dont forget to handle authentication to view the page
+
+
 function CreateGalleryPhotoProvider({children}) {
 
-    const [name, setName] = useState('');
-    const [image, setImage] = useState(null);
-    const [blurb, setBlurb] = useState('');
-    const [subImages, setSubImages] = useState([]);
-    const [prices, setPrices] = useState({
+    // default values for prices and productDims; consider moving into its own module later
+    const defaultPrices = {
         basePrices: {
           small: 125,
           medium: 250,
@@ -20,11 +25,9 @@ function CreateGalleryPhotoProvider({children}) {
           medium: 550,
           large: 875,
         },
-    });
-    // small: `Print size: 10″ x 18″ ; Paper size: 14″ x 22″ ; Framed size 16″ x 24″`, 
-    // medium: `Print size: 16.5″ x 30″ ; Paper size: 20.5″ x 34″ ; Framed size 22.5″ x 36″`, 
-    // large: `Print size: 22.5″ x 40″ ; Paper size: 28.5″ x 46″ ; Framed size 30.5″ x 48″`,
-    const [productDims, setProductDims] = useState({            
+    }
+
+    const defaultProductDims = {            
         printSize: {
             small: `10″ x 18″`, 
             medium: `16.5″ x 30"`, 
@@ -40,12 +43,15 @@ function CreateGalleryPhotoProvider({children}) {
             medium: `22.5″ x 36″`, 
             large: `30.5″ x 48″`,
         }
-    });
+    }
 
+    const [name, setName] = useState('');
+    const [image, setImage] = useState(null);
+    const [blurb, setBlurb] = useState('');
+    const [prices, setPrices] = useState({...defaultPrices});
+    const [productDims, setProductDims] = useState({...defaultProductDims});
     const [isArialPhoto, setIsArialPhoto] = useState(false);        
-
     const [country, setCountry] = useState('');
-
     const [subImage1, setSubImage1] = useState(null);
     const [subImage2, setSubImage2] = useState(null);
 
@@ -76,10 +82,6 @@ function CreateGalleryPhotoProvider({children}) {
         setBlurb(e.target.value);
     }
 
-    
-
-
-
     const handlePricesChange = (category, size, newValue) => {
         setPrices((prevValues) => ({
             ...prevValues,
@@ -100,6 +102,18 @@ function CreateGalleryPhotoProvider({children}) {
         }));
     };
 
+    function setInitialGalleryPhotoNull() {
+        setName('');
+        setImage(null)
+        setBlurb('')
+        setPrices({...defaultPrices})
+        setProductDims({...defaultProductDims})
+        setIsArialPhoto(false);
+        setCountry('');
+        setSubImage1(null);
+        setSubImage2(null);
+    }
+
 
     function handleCountryChange(e) {
         setCountry(e.target.value); 
@@ -112,8 +126,6 @@ function CreateGalleryPhotoProvider({children}) {
             name, setName, handleNameChange,
             image, setImage, handleImageUpload,
             blurb, setBlurb, handleBlurbChange,
-
-            subImages, setSubImages, 
             prices, setPrices, handlePricesChange,
             productDims, setProductDims, handleProductDimsChange,
             isArialPhoto, setIsArialPhoto, handleIsArialPhoto,
@@ -121,6 +133,7 @@ function CreateGalleryPhotoProvider({children}) {
 
             subImage1, setSubImage1, 
             subImage2, setSubImage2,
+            setInitialGalleryPhotoNull,
         }}>
             {children}
         </CreateGalleryPhotoContext.Provider>

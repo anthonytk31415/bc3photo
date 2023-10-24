@@ -8,6 +8,8 @@ import Stack from 'react-bootstrap/Stack';
 import Button from 'react-bootstrap/Button';
 
 import { CreateBlogPostContext } from '../../providers/CreateBlogPostProvider';
+// import { prepareToken } from '../../fetchRequests/verifyToken';
+import { fetchPostBackend } from '../../fetchRequests/fetchPost';
 
 ////////////////////////////////////////////////
 // build macros elements holder
@@ -201,42 +203,42 @@ function ImageSetElement(props){
 }
 
 
-function prepareToken() {
-    const token = localStorage.getItem('token');
-    if (!token) {
-        throw new Error("Token not found.")
-    }
-    return token
-}
+// function prepareToken() {
+//     const token = localStorage.getItem('token');
+//     if (!token) {
+//         throw new Error("Token not found.")
+//     }
+//     return token
+// }
 
 
 // write the post to the /Blogpost path
-async function formSubmit(newPost) {
-    const token = prepareToken()
+// async function formSubmit(newPost) {
+//     const token = prepareToken()
 
-    // later write the post requests here.
-    try {
-        fetch('http://localhost:8080/blogpost', {
-            method: 'POST', 
-            headers: {
-                "Content-Type": "application/json",
-                Authorization: `Bearer ${token}`,
-            },
-            body: JSON.stringify(newPost)
-        })
-        .then(response => {
-            console.log('transfer complete');
-            console.log(response);                  
-        })
-        .catch(() => {
-            console.error("error triggered during fetch request")
-        })
-    } catch(error) {
-        console.error("post error occurred.")
-        console.error(error)
-    }
+//     // later write the post requests here.
+//     try {
+//         fetch('http://localhost:8080/blogpost', {
+//             method: 'POST', 
+//             headers: {
+//                 "Content-Type": "application/json",
+//                 Authorization: `Bearer ${token}`,
+//             },
+//             body: JSON.stringify(newPost)
+//         })
+//         .then(response => {
+//             console.log('transfer complete');
+//             console.log(response);                  
+//         })
+//         .catch(() => {
+//             console.error("error triggered during fetch request")
+//         })
+//     } catch(error) {
+//         console.error("post error occurred.")
+//         console.error(error)
+//     }
 
-};
+// };
 
 
 
@@ -254,7 +256,7 @@ function SubmitBlogPostButton(){
 
         let blogPost = new BlogPost(null, title, new Date().toISOString(), blogPostBody, cover, cover.name); 
         try {
-            formSubmit(blogPost)
+            fetchPostBackend(blogPost, "/blogpost")
                 .then(data => {
                     console.log("Submission completed.")
                 })

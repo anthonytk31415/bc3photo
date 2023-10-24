@@ -4,24 +4,18 @@ import { CreateGalleryPhotoContext } from '../../providers/CreateGalleryPhotoPro
 import Form from 'react-bootstrap/Form';
 import Stack from 'react-bootstrap/Stack';
 import Button from 'react-bootstrap/Button';
-import { GalleryPhoto } from './GalleryPhoto';
+import { GalleryPhotoElement } from './GalleryPhotoElement';
 import Table from 'react-bootstrap/Table';
 import { FormControlPrice } from './FormControlPrice';
 import { FormControlText } from './FormControlText';
-
-/// preview
+import { fetchPostBackend } from '../../fetchRequests/fetchPost';
+import { GalleryPhoto } from '../../classes/GalleryPhoto';
 
 // menu for form elements
 
-// for these variables: 
-// country, framedprices, prices, productDims 
-// build an interface so you can either select prior 
-// built ones, or add new ones via the backend.
-// 
-
-
-
-
+// NEXT: 
+// - build to backend
+//-  think about how to refactor this
 
 function GalleryPhotoBaseElements(){
 
@@ -33,13 +27,13 @@ function GalleryPhotoBaseElements(){
         productDims, setProductDims, handleProductDimsChange,
         country, 
         isArialPhoto, handleCountryChange, 
-
         handleIsArialPhoto,
         subImage1, setSubImage1, 
         subImage2, setSubImage2,
 
     } = useContext(CreateGalleryPhotoContext);
 
+    // use package to grab country list 
     var countries = require("i18n-iso-countries");
     countries.registerLocale(require("i18n-iso-countries/langs/en.json"));
     const countryList = Object.values(countries.getNames("en", {select: "official"}))
@@ -52,7 +46,7 @@ function GalleryPhotoBaseElements(){
                 {/* Section for Title, Upload Cover, Blurb */}
                 <Form.Group className="mb-1" controlId="formMainElements">
                     <Stack direction="horizontal" gap={2}>
-                        <label className="formLabel">Title</label>
+                        <label className="formLabel">Name</label>
                         <Form.Control type="text" value={name} required onChange={handleNameChange}/>
                     </Stack>
                     <Stack direction="horizontal" gap={2}>
@@ -248,24 +242,41 @@ function GalleryPhotoBaseElements(){
     )
 }
 
+
+
+
 // submit button; need to do the functionality later
-function GalleryPhotoSubmitButton() {
-    return (
-        <div>
-            <Button> Submit Gallery Photo </Button>
-        </div>
-    )
-}
 
 
 // main consolidation of components
 
 function GalleryPhotoCreateMenu() {
     const {
-        name, image, blurb, 
-        subImage1, subImage2, 
-        country, prices, productDims, isArialPhoto, handleIsArialPhoto, 
+        name, image, blurb, prices, productDims, country, subImage1, subImage2, isArialPhoto, 
+        handleIsArialPhoto, setInitialGalleryPhotoNull, 
     } = useContext(CreateGalleryPhotoContext);
+
+
+    function submitGalleryPhoto() {
+        // do the fetch request
+        const galleryPhoto = new GalleryPhoto(null, name, image, blurb, prices, productDims, country, subImage1, subImage2, isArialPhoto)
+        const path = '/galleryphoto'
+        fetchPostBackend(galleryPhoto, path)
+            .then(response => {
+                setInitialGalleryPhotoNull();
+        })
+
+
+    }
+
+    function GalleryPhotoSubmitButton() {
+        return (
+            <div>
+                <Button onClick={submitGalleryPhoto}> Submit Gallery Photo </Button>
+            </div>
+        )
+    }
+    
     return (
         <div>
             <GalleryPhotoBaseElements/>
@@ -273,7 +284,7 @@ function GalleryPhotoCreateMenu() {
             <div> 
                 <p>Preview here</p>
                 {name && image && blurb &&
-                <GalleryPhoto 
+                <GalleryPhotoElement 
                     name={name} image={image} blurb={blurb} 
                     subImage1={subImage1} subImage2={subImage2}
                     country={country} prices={prices}

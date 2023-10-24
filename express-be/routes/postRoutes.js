@@ -6,6 +6,7 @@ const { verifyAuth } = require('./authenticateRoutes');
 const { ImageModel } = require('../models/ImageModel');
 
 const { getNowDate } = require('../functions/helper');
+const { GalleryPhotoModel } = require('../models/GalleryPhotoModel');
 
 
 // upload image
@@ -39,17 +40,17 @@ router.post('/blogpost', verifyAuth, async function(req, res, next) {
     let cover_id;   // will contain the id of the image
     console.log("(1) current status: ", res.statusCode)
     try { 
-
+        // iterate through blogBody to find image coded in raw string
+        // then store it in images using imageUpload, then 
+        // store in this object with the image_id
         let updateBlogBody = [];
         for (let i = 0; i < postData.blogBody.length; i ++) {
             let blogBodyItem; 
             let cur = postData.blogBody[i]
             if (cur.type == "imageSet") {
                 // if cur == image then do the image stuff; then append
-                console.log('this is the caption: ', cur.data.caption, 'name: ', cur.data.name)
                 let image_id = await imageUpload(cur.data.name, cur.data.file, user_id)
                 // upload image. then put the id in the data portion; for get requests, we'll then download data
-
                 blogBodyItem = {
                     type: cur.type, 
                     data: {
@@ -58,7 +59,6 @@ router.post('/blogpost', verifyAuth, async function(req, res, next) {
                         image_id: image_id, 
                     }
                 }
-                
             } else {
             // else; not image, so just append; data = string
                 blogBodyItem = {
@@ -68,7 +68,6 @@ router.post('/blogpost', verifyAuth, async function(req, res, next) {
             }
             updateBlogBody.push(blogBodyItem);
         }
-
         cover_id = await imageUpload(postData.coverName, postData.cover, user_id);
         const newPost = new BlogPostModel({
             authorId: user_id, 
@@ -77,16 +76,48 @@ router.post('/blogpost', verifyAuth, async function(req, res, next) {
             blogBody: updateBlogBody, 
             cover: cover_id,
         })
+        await newPost.save()
+    } catch(e) {
+        console.error(e)
+    }
+    console.log("(3) current status: ", res.statusCode) 
+});
+
+
+
+router.post('/galleryphoto', verifyAuth, async function(req, res, next) {
+
+    let postData = req.body;
+    let user_id = req.user.user_id; 
+
+    try {
+
+        let image = await imageUpload(postData.name, postData.image, user_id);
+        let subImage1 =  await imageUpload(`${postData.name}-sub1`, postData.subImage1, user_id);
+        let subImage2 =  await imageUpload(`${postData.name}-sub2`, postData.subImage2, user_id);
+        const newPost = new GalleryPhotoModel({
+            date: getNowDate(),
+            user_id: user_id, 
+            name: postData.name,
+            image: image, 
+            blurb: postData.blurb, 
+            prices: postData.prices,
+            productDims: postData.productDims, 
+            country: postData.country, 
+            subImage1: subImage1, 
+            subImage2: subImage2, 
+            isArialPhoto: postData.isArialPhoto,
+        })
 
         await newPost.save()
-
+        
     } catch(e) {
         console.error(e)
     }
 
 
-    console.log("(3) current status: ", res.statusCode) 
-});
+
+}); 
 
 
 module.exports = router;

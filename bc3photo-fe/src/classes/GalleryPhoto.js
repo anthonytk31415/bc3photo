@@ -1,32 +1,19 @@
 class GalleryPhoto {
-    constructor(title, image, blurb, prices, productDims, country, subImagePair) {
-        this.title=title               // main title 
+    constructor(id, name, image, blurb, prices, productDims, country, subImage1, subImage2, isArialPhoto) {
+        this.id = id
+        this.name= name               // main title 
         this.image = image
         this.blurb = blurb
         this.prices = prices
         this.productDims = productDims
         this.country = country
-        this.subImagePair = subImagePair
+        this.subImage1 = subImage1
+        this.subImage2 = subImage2
+        this.isArialPhoto = isArialPhoto
     }
 }
 
 
-// prices: 
-// standard
-
-// frames: 
-// 1, 2, 3
-
-// description: 
-// prices, frames, dimensions, special requests
-
-
-
-
-// map frame prices, description
-
-
 // create reviews to map to the gallaryphoto
-
 
 export {GalleryPhoto}

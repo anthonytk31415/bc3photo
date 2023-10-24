@@ -15,7 +15,7 @@ function CreateBlogPost() {
     /// flow: verify auth, if true: then render page; if not, redirect to "need to auth"
     useEffect(() => {
         console.log('initiating CreateBlogPost page load.');
-            handleVerification(setIsAuthenticated)
+            handleVerification(setIsAuthenticated);
     });
 
 

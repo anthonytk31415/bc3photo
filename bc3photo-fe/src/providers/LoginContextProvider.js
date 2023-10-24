@@ -16,6 +16,8 @@ function LoginContextProvider({children}) {
     const [passwordError, setPasswordError] = useState('');
     const [showLogin, setShowLogin] = useState(false);
     
+    const [showLoginSuccess, setShowLoginSuccess] = useState(false);
+
     const [passwordConfirm, setPasswordConfirm] = useState('');
     const [passwordConfirmError, setPasswordConfirmError] = useState('');
     const [showSignup, setShowSignup] = useState(false);
@@ -27,7 +29,19 @@ function LoginContextProvider({children}) {
       console.log("pw clicked");
       setShowPassword(prevValue => !prevValue);
     }
-  
+    
+    function openShowLoginSuccess() {
+      setShowLoginSuccess(true);
+    }
+
+    function closeShowLoginSuccess() {
+      setShowLoginSuccess(false);
+
+      // reload current screen PLACEHOLDER to signiy you are now logged in and can reload stuff
+    }
+
+
+
     // function signupClick(e) {
     //   setSignupBool(true);
     // }
@@ -35,6 +49,10 @@ function LoginContextProvider({children}) {
     // function loginClick(e) {
     //     setSignupBool(false);
     // }
+
+    function closeLogin() {
+      setShowLogin(false);
+    }
   
     function handleEmailChange(e){
         setEmail(e.target.value);
@@ -89,7 +107,7 @@ function LoginContextProvider({children}) {
             emailError, setEmailError,
             password, setPassword,
             passwordError, setPasswordError, 
-            showLogin, setShowLogin, 
+            showLogin, setShowLogin, closeLogin,
       
             passwordConfirm, setPasswordConfirm,
             passwordConfirmError, setPasswordConfirmError,
@@ -102,6 +120,7 @@ function LoginContextProvider({children}) {
             closeLoginWindow,
       
             showPassword, toggleShowPassword,
+            showLoginSuccess, setShowLoginSuccess, openShowLoginSuccess, closeShowLoginSuccess,
       
             }}>
             {children}

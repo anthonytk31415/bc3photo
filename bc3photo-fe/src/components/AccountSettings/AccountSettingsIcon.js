@@ -1,9 +1,10 @@
 
 import React, { useContext, useState, useEffect, useRef} from 'react';
 import { Routes, Route, Link } from 'react-router-dom';
-import { LoginPage} from  '../../login';
-import { SignupPage} from  '../../signup';
+import { LoginPage} from  './login';
+import { SignupPage} from  './signup';
 import { LoginContext } from "../../providers/LoginContextProvider"
+import { LoginSuccess } from './LoginSuccess';
 // import { CreateBlogPost } from '../../createBlogPost';
 // import { CreateGallaryPhoto } from '../../createGallaryPhoto';
 
@@ -14,7 +15,8 @@ function AccountSettingsIcon() {
  
     const {
         showSignup, setShowSignup,
-        showLogin, setShowLogin
+        showLogin, setShowLogin, 
+        showLoginSuccess, setShowLoginSuccess, 
         } = useContext(LoginContext);
 
     function toggleLogin() {
@@ -97,6 +99,14 @@ function AccountSettingsIcon() {
                             <div className={"background-gray show-background"} >
                                 <div className = "background-login">
                                 <SignupPage />
+                                </div>
+                            </div>
+                        )}
+
+                        {showLoginSuccess && (
+                            <div className={"background-gray show-background"} >
+                                <div className = "background-login">
+                                <LoginSuccess />
                                 </div>
                             </div>
                         )}

@@ -1,11 +1,11 @@
 import React, { useContext } from 'react'
 import { Routes, Route, } from 'react-router-dom';
 import { LoginPage} from  './login';
-import { LoginContext } from "./providers/LoginContextProvider"
-import { CustomFormInput } from './components/AccountSettings/CustomFormInput';
-import { AccountTitle } from './components/AccountSettings/AccountTitle';
-import { AccountBody } from './components/AccountSettings/AccountBody';
-import { CheckBoxShowPassword } from './components/AccountSettings/CheckBoxShowPassword';
+import { LoginContext } from "../../providers/LoginContextProvider"
+import { CustomFormInput } from './CustomFormInput';
+import { AccountTitle } from './AccountTitle';
+import { AccountBody } from './AccountBody';
+import { CheckBoxShowPassword } from './CheckBoxShowPassword';
 
 
 // writing Signup logic here

@@ -3,14 +3,14 @@ import { Routes, Route } from 'react-router-dom';
 
 import { SignupPage} from  './signup';
 
-import { AccountTitle } from './components/AccountSettings/AccountTitle';
-import { CustomFormInput } from './components/AccountSettings/CustomFormInput';
-import { AccountBody } from './components/AccountSettings/AccountBody';
-import { CheckBoxShowPassword } from './components/AccountSettings/CheckBoxShowPassword';
+import { AccountTitle } from './AccountTitle';
+import { CustomFormInput } from './CustomFormInput';
+import { AccountBody } from './AccountBody';
+import { CheckBoxShowPassword } from './CheckBoxShowPassword';
 
-import { LoginContext } from './providers/LoginContextProvider';
+import { LoginContext } from '../../providers/LoginContextProvider';
 
-function fetchLogin(newLogin) {
+function fetchLogin(newLogin, closeLogin, openSuccess) {
     fetch('http://localhost:8080/login', {
         method: 'POST', 
         headers: {
@@ -22,11 +22,14 @@ function fetchLogin(newLogin) {
         if (!response.ok) {
             throw new Error('Login failed');
         }
+        // close login window
+        closeLogin();
+        // open success window
+        openSuccess();
         return response.json()
 
     })        
     .then(response => {
-        
         // store token
         const token = response.data.token;
         localStorage.setItem('token', token);
@@ -43,8 +46,6 @@ function fetchLogin(newLogin) {
 };
 
 
-// add in step to say "login successful!"; try in the backend to verify using userid from the front end
-
 
 function LoginMenu(){
 
@@ -58,7 +59,7 @@ function LoginMenu(){
         handlePasswordChange, handlePasswordBlur, handlePasswordEntryFocus,
 
         showPassword, toggleShowPassword,
-
+        openShowLoginSuccess, closeLogin,
         } = useContext(LoginContext);
 
     function handleSubmit(e){
@@ -68,10 +69,10 @@ function LoginMenu(){
             // write the login flow; 
             // *** currently disabled ***
             const newLogin = {email, password};
-            fetchLogin(newLogin);
+            fetchLogin(newLogin, closeLogin, openShowLoginSuccess);
             console.log('Form Submitted!');
             return;
-        }else {
+        } else {
             console.log('form error')
         }
     }

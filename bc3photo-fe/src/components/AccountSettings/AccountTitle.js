@@ -1,6 +1,6 @@
 import React from 'react';
 
-
+// Upper bar of the Account Settings 
 function AccountTitle ({title, closeLoginWindowFn}) {
     return (
         <div className = "account-title-container"> 

@@ -1,10 +1,7 @@
 import React from "react";
 
-
+// this is the custom check box to show or hide the password 
 function CheckBoxShowPassword({showPassword, toggleShowPassword}) {
-
-
-
     return (
         <div className ="CheckBoxShowPassword" onClick={toggleShowPassword}> 
             {showPassword ? 

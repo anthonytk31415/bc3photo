@@ -24,7 +24,7 @@ function CreateGalleryPhotoProvider({children}) {
     // small: `Print size: 10″ x 18″ ; Paper size: 14″ x 22″ ; Framed size 16″ x 24″`, 
     // medium: `Print size: 16.5″ x 30″ ; Paper size: 20.5″ x 34″ ; Framed size 22.5″ x 36″`, 
     // large: `Print size: 22.5″ x 40″ ; Paper size: 28.5″ x 46″ ; Framed size 30.5″ x 48″`,
-    const [productDims, setProductDims] = useState({
+    const [productDims, setProductDims] = useState({            
         printSize: {
             small: `10″ x 18″`, 
             medium: `16.5″ x 30"`, 
@@ -42,30 +42,42 @@ function CreateGalleryPhotoProvider({children}) {
         }
     });
 
-    const [isArialPhoto, setIsArialPhoto] = useState(false); 
+    const [isArialPhoto, setIsArialPhoto] = useState(false);        
+
     const [country, setCountry] = useState('');
+
+    const [subImage1, setSubImage1] = useState(null);
+    const [subImage2, setSubImage2] = useState(null);
 
     function handleNameChange(e) {
         setName(e.target.value);
     }
 
-    function handleImageUpload(e) {
-        const selectedImage = e.target.files[0];
+    function handleIsArialPhoto() {
+        setIsArialPhoto(prevValue => !prevValue)
+    }
+
+    function handleImageUpload(event, setImageFn) {
+        const selectedImage = event.target.files[0];
         if (selectedImage) {        
         const reader = new FileReader();
 
         reader.onload = (e) => {
             const base64ImageData = e.target.result;    // Contains the base64-encoded image data
-            setImage(base64ImageData);
+            setImageFn(base64ImageData);
             console.log('Image encoded as base64');
         };
 
         reader.readAsDataURL(selectedImage);            // Read the image file as data URL (base64)
         }
     };
+
     function handleBlurbChange(e) {
         setBlurb(e.target.value);
     }
+
+    
+
 
 
     const handlePricesChange = (category, size, newValue) => {
@@ -104,9 +116,11 @@ function CreateGalleryPhotoProvider({children}) {
             subImages, setSubImages, 
             prices, setPrices, handlePricesChange,
             productDims, setProductDims, handleProductDimsChange,
-            isArialPhoto, setIsArialPhoto,
+            isArialPhoto, setIsArialPhoto, handleIsArialPhoto,
             country, setCountry, handleCountryChange,
 
+            subImage1, setSubImage1, 
+            subImage2, setSubImage2,
         }}>
             {children}
         </CreateGalleryPhotoContext.Provider>

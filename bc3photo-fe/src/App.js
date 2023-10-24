@@ -10,7 +10,7 @@ import {About} from './about'
 import { BottomRibbon } from './bottomRibbon';
 import { Faq } from './faq';
 import { Blog } from './blog';
-import {LoginPage} from './components/AccountSettings/login';
+import {LoginPage} from './components/AccountSettings/LoginPage';
 import {SignupPage} from './components/AccountSettings/signup';
 import { CreateBlogPost } from './createBlogPost'
 import { CreateGalleryPhoto } from './createGalleryPhoto';

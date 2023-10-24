@@ -27,11 +27,16 @@ function GalleryPhotoBaseElements(){
 
     const {
         name, handleNameChange, 
-        handleImageUpload,
+        setImage, handleImageUpload,
         blurb, handleBlurbChange, 
         prices, setPrices, handlePricesChange,
         productDims, setProductDims, handleProductDimsChange,
-        country, handleCountryChange, 
+        country, 
+        isArialPhoto, handleCountryChange, 
+
+        handleIsArialPhoto,
+        subImage1, setSubImage1, 
+        subImage2, setSubImage2,
 
     } = useContext(CreateGalleryPhotoContext);
 
@@ -52,7 +57,7 @@ function GalleryPhotoBaseElements(){
                     </Stack>
                     <Stack direction="horizontal" gap={2}>
                         <label className="formLabel">Upload Cover</label>
-                        <Form.Control type="file" accept="image/*" onChange={handleImageUpload}/>
+                        <Form.Control type="file" accept="image/*" onChange={(e)=> handleImageUpload(e, setImage)}/>
                     </Stack>
                     <Stack direction="horizontal" gap={2}>
                         <label className="formLabel">Blurb</label>
@@ -222,6 +227,21 @@ function GalleryPhotoBaseElements(){
                         </Form.Select>
                     </Stack>
 
+                    <Stack direction="horizontal" gap={2}>
+                        <label className="formLabel">Upload Sub-Image 1</label>
+                        <Form.Control type="file" accept="image/*" onChange={(e)=> handleImageUpload(e, setSubImage1)}/>
+                    </Stack>
+                    <Stack direction="horizontal" gap={2}>
+                        <label className="formLabel">Sub-Image 2</label>
+                        <Form.Control type="file" accept="image/*" onChange={(e)=> handleImageUpload(e, setSubImage2)}/>
+                    </Stack>
+                    <Stack direction="horizontal" gap={2}>
+                        <label className="formLabel">Is Arial Photo?</label>
+                        <Form.Check type="switch" value={isArialPhoto} onChange={handleIsArialPhoto}/>
+                    </Stack>    
+
+
+
                 </Form.Group>
             </Form>
         </div>
@@ -242,9 +262,9 @@ function GalleryPhotoSubmitButton() {
 
 function GalleryPhotoCreateMenu() {
     const {
-        name, 
-        image,
-        blurb, 
+        name, image, blurb, 
+        subImage1, subImage2, 
+        country, prices, productDims, isArialPhoto, handleIsArialPhoto, 
     } = useContext(CreateGalleryPhotoContext);
     return (
         <div>
@@ -253,7 +273,14 @@ function GalleryPhotoCreateMenu() {
             <div> 
                 <p>Preview here</p>
                 {name && image && blurb &&
-                <GalleryPhoto name={name} image={image} blurb={blurb} />
+                <GalleryPhoto 
+                    name={name} image={image} blurb={blurb} 
+                    subImage1={subImage1} subImage2={subImage2}
+                    country={country} prices={prices}
+                    productDims={productDims}
+                    isArialPhoto={isArialPhoto}
+                    handleIsArialPhoto = {handleIsArialPhoto}
+                    />
                 }
             </div>
         </div>

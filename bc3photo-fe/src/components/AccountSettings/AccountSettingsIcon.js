@@ -1,7 +1,7 @@
 
 import React, { useContext, useState, useEffect, useRef} from 'react';
 import { Routes, Route, Link } from 'react-router-dom';
-import { LoginPage} from  './login';
+import { LoginPage} from  './LoginPage';
 import { SignupPage} from  './signup';
 import { LoginContext } from "../../providers/LoginContextProvider"
 import { LoginSuccess } from './LoginSuccess';

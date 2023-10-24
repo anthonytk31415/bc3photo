@@ -1,6 +1,6 @@
 import React, { useContext } from 'react'
 import { Routes, Route, } from 'react-router-dom';
-import { LoginPage} from  './login';
+import { LoginPage} from  './LoginPage';
 import { LoginContext } from "../../providers/LoginContextProvider"
 import { CustomFormInput } from './CustomFormInput';
 import { AccountTitle } from './AccountTitle';

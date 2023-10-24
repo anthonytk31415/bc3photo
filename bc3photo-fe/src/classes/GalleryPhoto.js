@@ -1,14 +1,14 @@
-// class GallaryPhoto {
-//         constructor() {
-//             this.name               // main title 
-//             this.image =            // main image likely an id later on the backend
-//             this.prices = prices    // small, med, large ; hash table? 
-//             this.blurb =        
-//             this.subImages                   // array of photos
-//             this.id                 // for the backend; null at the beginning; an object id
-//             this.relatedPhotos      // array of gallary id's 
-//         }
-// }
+class GalleryPhoto {
+    constructor(title, image, blurb, prices, productDims, country, subImagePair) {
+        this.title=title               // main title 
+        this.image = image
+        this.blurb = blurb
+        this.prices = prices
+        this.productDims = productDims
+        this.country = country
+        this.subImagePair = subImagePair
+    }
+}
 
 
 // prices: 
@@ -27,3 +27,6 @@
 
 
 // create reviews to map to the gallaryphoto
+
+
+export {GalleryPhoto}

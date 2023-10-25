@@ -32,7 +32,7 @@ function BlogEntries({blogData}) {
     return (
         <div className='blogPostContainer'>
             {elements}
-            <p>Sample Card Below</p>
+            {/* <p>Sample Card Below</p>
             <Card style ={{width: '20rem'}}> 
                 <Card.Img variant="top" src="/images/AntelopeBeampost2-1200x800.jpg" />
                 <Card.Body >
@@ -40,10 +40,7 @@ function BlogEntries({blogData}) {
                     <Card.Subtitle className="blogPostPreviewDate">Date</Card.Subtitle>
                     <Card.Text>What?</Card.Text>
                 </Card.Body>
-            </Card>
-            
-            
-        
+            </Card> */}
         </div>
     )
 }

@@ -44,3 +44,12 @@ fetch requests happen:
 
 
 verify isAdmin for admin features
+
+
+next: 
+- GET REQUESTS for gallery for all(DONE)
+- add categories to galleryPhotos
+
+- purchase funnel
+- checkout features
+- styling

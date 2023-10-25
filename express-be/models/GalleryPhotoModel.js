@@ -17,6 +17,11 @@
 const mongoose = require('mongoose') 
 const Schema = mongoose.Schema;
 
+
+// later: add
+// - tags
+// - related photos
+// - categories
 const GalleryPhotoSchema = new Schema ({
     date: Date,
     user_id: mongoose.Schema.Types.ObjectId, 

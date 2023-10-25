@@ -101,15 +101,12 @@ router.get('/blog/:blog_id', async function (req, res) {
 
 /// galleryphoto
 
-
-
 router.get('/galleryphoto/:galleryphoto_id', async function (req, res) {
     const galleryphoto_id = req.params.galleryphoto_id; 
     try {
         let data = await GalleryPhotoModel.findOne(
             { _id: new mongoose.Types.ObjectId(galleryphoto_id)}
         );
-        console.log(data);
         data = JSON.parse(JSON.stringify(data));
 
         // now handle the images
@@ -125,6 +122,24 @@ router.get('/galleryphoto/:galleryphoto_id', async function (req, res) {
         console.log(e);
     }
 }); 
+
+router.get('/galleries', async function (req, res) {
+    try {
+        let data = await GalleryPhotoModel.find({}, 'name _id, image')
+        data = JSON.parse(JSON.stringify(data));
+        
+        for (let i = 0; i < data.length; i ++){
+            let curGalleryPhoto = data[i];
+            let img = await getImage(curGalleryPhoto.image);
+            curGalleryPhoto.image = img;
+        }
+
+        return res.json(data)
+    } catch (e) {
+        console.log(e);
+    }
+
+});
 
 
 // when you get a specific user_id you need to also fetch the images and ensure transformation. 

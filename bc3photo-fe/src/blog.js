@@ -4,6 +4,7 @@ import { BlogEntries } from './components/BlogPost/BlogEntries';
 
 function Blog() {
     const [blogData, setBlogData] = useState([]);
+    
     useEffect(() => {
         console.log('initiating load.');
         fetch('http://localhost:8080/blogdata', {

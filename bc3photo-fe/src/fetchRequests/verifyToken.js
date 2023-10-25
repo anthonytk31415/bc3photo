@@ -1,5 +1,3 @@
-
-
 function prepareToken() {
     const token = localStorage.getItem('token');
     if (!token) {
@@ -7,8 +5,6 @@ function prepareToken() {
     }
     return token
 }
-
-
 
 // grab token from local storage
 function getToken() {

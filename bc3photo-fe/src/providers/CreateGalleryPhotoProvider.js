@@ -1,4 +1,6 @@
 import React, {useState} from 'react';
+import { defaultPrices, defaultProductDims } from '../data/galleryPhotoDefaults'; 
+// import { prepareToken } from '../fetchRequests/verifyToken';
 
 // build use context: variable manager!
 const CreateGalleryPhotoContext = React.createContext();
@@ -7,43 +9,8 @@ const CreateGalleryPhotoContext = React.createContext();
 // medium: `Print size: 16.5″ x 30″ ; Paper size: 20.5″ x 34″ ; Framed size 22.5″ x 36″`, 
 // large: `Print size: 22.5″ x 40″ ; Paper size: 28.5″ x 46″ ; Framed size 30.5″ x 48″`,
 
-
 // dont forget to handle authentication to view the page
-
-
 function CreateGalleryPhotoProvider({children}) {
-
-    // default values for prices and productDims; consider moving into its own module later
-    const defaultPrices = {
-        basePrices: {
-          small: 125,
-          medium: 250,
-          large: 400,
-        },
-        framedPrices: {
-          small: 275,
-          medium: 550,
-          large: 875,
-        },
-    }
-
-    const defaultProductDims = {            
-        printSize: {
-            small: `10″ x 18″`, 
-            medium: `16.5″ x 30"`, 
-            large: `22.5″ x 40″`,
-        }, 
-        paperSize: {
-            small: `14″ x 22″`, 
-            medium: `20.5″ x 34″`, 
-            large: `28.5″ x 46″`,
-        }, 
-        framedSize: {
-            small: `16″ x 24″`, 
-            medium: `22.5″ x 36″`, 
-            large: `30.5″ x 48″`,
-        }
-    }
 
     const [name, setName] = useState('');
     const [image, setImage] = useState(null);

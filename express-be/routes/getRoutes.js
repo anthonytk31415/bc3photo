@@ -4,6 +4,7 @@ const mongoose = require('mongoose')
 
 const {BlogPostModel} = require('../models/BlogPostModel');
 const {ImageModel} = require('../models/ImageModel');
+const { GalleryPhotoModel } = require('../models/GalleryPhotoModel');
 
 
 router.get('/blogdata', async function (req, res) {
@@ -90,6 +91,33 @@ router.get('/blog/:blog_id', async function (req, res) {
                 }
                 element.data = newData;
             }
+        }
+        return res.json(data);
+
+    } catch (e) {
+        console.log(e);
+    }
+}); 
+
+/// galleryphoto
+
+
+
+router.get('/galleryphoto/:galleryphoto_id', async function (req, res) {
+    const galleryphoto_id = req.params.galleryphoto_id; 
+    try {
+        let data = await GalleryPhotoModel.findOne(
+            { _id: new mongoose.Types.ObjectId(galleryphoto_id)}
+        );
+        console.log(data);
+        data = JSON.parse(JSON.stringify(data));
+
+        // now handle the images
+        const images = ['image', 'subImage1', 'subImage2']
+
+        for (let i = 0; i < images.length; i ++) {
+            let curImage = await getImage(data[images[i]])
+            data[images[i]] = curImage
         }
         return res.json(data);
 

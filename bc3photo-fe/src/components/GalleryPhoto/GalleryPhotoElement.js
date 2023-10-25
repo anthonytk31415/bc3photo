@@ -1,43 +1,7 @@
-/// here's where we'll house what the gallaryPhoto looks like
-// use this to generate gallary photo and the preview
-
-// will need menu: 
-// - print size 
-// - optional frame
-// - descriptions of print and frame
-// - reviews
-
-// basePrices: {
-//     small: 125,
-//     medium: 250,
-//     large: 400,
-//   },
-//   framedPrices: {
-//     small: 275,
-//     medium: 550,
-//     large: 875,
-//   },
-
-
-// printSize: {
-//     small: `10″ x 18″`, 
-//     medium: `16.5″ x 30"`, 
-//     large: `22.5″ x 40″`,
-// }, 
-// paperSize: {
-//     small: `14″ x 22″`, 
-//     medium: `20.5″ x 34″`, 
-//     large: `28.5″ x 46″`,
-// }, 
-// framedSize: {
-//     small: `16″ x 24″`, 
-//     medium: `22.5″ x 36″`, 
-//     large: `30.5″ x 48″`,
-// }
-
-
 import React from "react";
 
+/// here's where we'll house what the gallaryPhoto looks like
+// use this to generate gallary photo and the preview
 function GalleryPhotoElement({name, image, blurb, subImage1, subImage2, country, prices, productDims, isArialPhoto}) {
     const sizes = ['small', 'medium', 'large']
     let basePricesElements = []
@@ -45,7 +9,6 @@ function GalleryPhotoElement({name, image, blurb, subImage1, subImage2, country,
     let printSizeElements = []
     let paperSizeElements = []
     let framedSizeElements = []
-
 
     // can probably refactor all of this to make it more tidy
     for (let j = 0; j < sizes.length; j ++) {
@@ -80,7 +43,6 @@ function GalleryPhotoElement({name, image, blurb, subImage1, subImage2, country,
             {paperSizeElements}
             <h4> Framed Size Dimensions</h4>
             {framedSizeElements}
-
 
             <h4> Special Requests:</h4>
             <p>All images are also available printed on Metal, Acrylic, and Canvas. If you have a specific size in mind, all images are available in custom sizes and frames as well.</p>

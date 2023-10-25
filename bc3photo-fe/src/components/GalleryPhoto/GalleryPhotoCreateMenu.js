@@ -233,21 +233,13 @@ function GalleryPhotoBaseElements(){
                         <label className="formLabel">Is Arial Photo?</label>
                         <Form.Check type="switch" value={isArialPhoto} onChange={handleIsArialPhoto}/>
                     </Stack>    
-
-
-
                 </Form.Group>
             </Form>
         </div>
     )
 }
 
-
-
-
 // submit button; need to do the functionality later
-
-
 // main consolidation of components
 
 function GalleryPhotoCreateMenu() {
@@ -289,8 +281,7 @@ function GalleryPhotoCreateMenu() {
                     subImage1={subImage1} subImage2={subImage2}
                     country={country} prices={prices}
                     productDims={productDims}
-                    isArialPhoto={isArialPhoto}
-                    handleIsArialPhoto = {handleIsArialPhoto}
+
                     />
                 }
             </div>

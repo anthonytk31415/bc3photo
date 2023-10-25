@@ -34,7 +34,7 @@ const GalleryPhotoSchema = new Schema ({
     collection: 'galleryphotos'
 });
 
-const GalleryPhotoModel = mongoose.model('galleryphoto', GalleryPhotoSchema)
+const GalleryPhotoModel = mongoose.model('galleryPhoto', GalleryPhotoSchema)
 
 module.exports =  {
     GalleryPhotoModel,

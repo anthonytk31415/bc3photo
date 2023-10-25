@@ -19,6 +19,7 @@ import { LoginContextProvider } from './providers/LoginContextProvider';
 import { UserLoggedInContextProvider } from './providers/UserLoggedInContextProvider';
 
 import {BlogEntry} from './blogEntry'
+import { GalleryPhotoEntry } from './galleryPhotoEntry';
 
 function App() {
   return (
@@ -31,6 +32,7 @@ function App() {
                   <Routes> 
                     <Route key="front-page" path="/" element={ <FrontPage/> } />
                     <Route key="galleries" path="/galleries" element={ <Galleries/> } />
+                    <Route key="galleryPhoto" path="/galleries/:galleryphoto_id" element={ <GalleryPhotoEntry/> } />
                     <Route key="about" path="/about" element={ <About/> } />
                     <Route key="blog" path="/blog" element={<Blog/>} />
                     <Route key="blog-entry" path="/blog/:blog_id" element={<BlogEntry />}/>

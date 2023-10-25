@@ -1,9 +1,6 @@
 import React from 'react';
 import Form from 'react-bootstrap/Form';
 
-
-
-
 // input = prices.basePrices.large
 // handleChange = handlePricesChange
 // category = 'basePrices'

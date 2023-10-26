@@ -29,4 +29,10 @@ const defaultProductDims = {
     }
 }
 
-export {defaultPrices, defaultProductDims}
+
+
+const photoSizes = ['small', 'medium', 'large']
+
+
+
+export {defaultPrices, defaultProductDims, photoSizes}

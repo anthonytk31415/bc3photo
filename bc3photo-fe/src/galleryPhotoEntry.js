@@ -2,6 +2,7 @@ import React, {useEffect, useState} from 'react';
 import { useParams } from 'react-router-dom';
 import { GalleryPhotoElement } from './components/GalleryPhoto/GalleryPhotoElement';
 import {defaultPrices, defaultProductDims} from './data/galleryPhotoDefaults';
+import { OrderMenu } from './orderMenu/OrderMenu';
 
 function GalleryPhotoEntry() {
 
@@ -47,14 +48,16 @@ function GalleryPhotoEntry() {
             <p> this is my Gallery Photo: {galleryphoto_id} </p>
             <p>gallery photo name: {name}</p>
             {name && image && blurb && 
-                <GalleryPhotoElement
-                name={name} image={image} blurb={blurb} 
-                subImage1={subImage1} subImage2={subImage2}
-                country={country} prices={prices}
-                productDims={productDims}
-                isArialPhoto={isArialPhoto}
-                />
-            
+                <div>
+                    <GalleryPhotoElement
+                        name={name} image={image} blurb={blurb} 
+                        subImage1={subImage1} subImage2={subImage2}
+                        country={country} prices={prices}
+                        productDims={productDims}
+                        isArialPhoto={isArialPhoto}
+                    />
+                    <OrderMenu/>
+                </div>
             }               
             
 

@@ -10,7 +10,6 @@ import { handleVerification } from './fetchRequests/verifyToken';
 import { GalleryPhotoCreateMenu } from './components/GalleryPhoto/GalleryPhotoCreateMenu';
 import { CreateGalleryPhotoProvider } from './providers/CreateGalleryPhotoProvider';
 
-// later add to centralized fetch functions?
 
 function CreateGalleryPhoto() {
 

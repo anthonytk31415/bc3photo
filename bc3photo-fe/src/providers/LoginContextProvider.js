@@ -25,6 +25,8 @@ function LoginContextProvider({children}) {
   
     const [showPassword, setShowPassword] = useState(false);
   
+
+    
     function toggleShowPassword(e) {
       console.log("pw clicked");
       setShowPassword(prevValue => !prevValue);

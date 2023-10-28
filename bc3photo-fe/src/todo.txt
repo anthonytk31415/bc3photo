@@ -53,3 +53,5 @@ next:
 - purchase funnel
 - checkout features
 - styling
+
+-research hosting

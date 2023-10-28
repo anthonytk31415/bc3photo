@@ -114,9 +114,6 @@ router.post('/galleryphoto', verifyAuth, async function(req, res, next) {
     } catch(e) {
         console.error(e)
     }
-
-
-
 }); 
 
 

@@ -60,3 +60,4 @@ next:
 - AWS: 
 - also handles 
 - research cloud/ s3 for frontend and ec2 for backend
+- consider adding split paths 

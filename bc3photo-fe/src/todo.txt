@@ -64,3 +64,4 @@ next:
 
 
 side project - lets post leetcode and the regression
+# lets add aws today

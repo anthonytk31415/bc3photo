@@ -11,7 +11,7 @@ const {UserAuthModel} = require('../models/UserAuthModel');
 // Helper Functions 
 
 
-// validtes the token then provides access to the 
+// Validates the token then provides access to the 
 // token's user_id and email via req.user
 async function verifyAuth(req, res, next) {
     const token = req.header('Authorization')?.split(' ')[1]; // Use optional chaining
